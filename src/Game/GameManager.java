@@ -14,6 +14,7 @@ public class GameManager extends AbstractGame
 	
 	public GameManager()
 	{
+		objects.add(new UI());
 		objects.add(new player1());
 		objects.add(new player2());
 	}

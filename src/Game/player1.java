@@ -10,7 +10,6 @@ import GameEngine.GFX.Image;
 public class player1 extends GameObject
 {
 	private Image image;
-	private Renderer renderer;
 	private int x=10;
 	private int y=10;
 	
@@ -21,7 +20,6 @@ public class player1 extends GameObject
 	
 	public void start()
 	{
-		renderer =new Renderer(this);
 	}
 	public void update(GameEngine ge, float dt)
 	{

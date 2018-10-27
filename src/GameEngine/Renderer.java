@@ -18,7 +18,7 @@ public class Renderer
 	
 	public void clear()
 	{
-		for (int i=0; i<p.length; i++)	{p[i]=0;}
+		for (int i=0; i<p.length; i++)	{p[i]=0xffCADAFF;}
 	}
 	
 	public void setPixel(int x, int y, int value)

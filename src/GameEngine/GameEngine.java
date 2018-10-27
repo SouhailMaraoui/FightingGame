@@ -10,7 +10,7 @@ public class GameEngine implements Runnable
 	private Input input;
 	private AbstractGame game;
 
-	private int width=1024, height=576;
+	private int width=1000, height=550;
 
 	private String title="Fighting Game";
 	
