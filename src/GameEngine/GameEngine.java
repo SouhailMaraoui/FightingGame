@@ -1,5 +1,7 @@
 package GameEngine;
 
+import java.awt.event.KeyEvent;
+
 public class GameEngine implements Runnable
 {
 	private Thread thread;
@@ -31,16 +33,18 @@ public class GameEngine implements Runnable
 	{	
 		while(true)
 		{
-			renderer.clear();
-			
-			input.update();
 			game.update(this,1f);
 			game.render(this, renderer);
 			
+			input.update();
+			
 			window.update();
+			renderer.clear();
 			
 			try   {Thread.sleep(10);}
 			catch (InterruptedException e){};
+
+			
 		}
 	}
 	
