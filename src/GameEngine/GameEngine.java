@@ -4,6 +4,7 @@ import Game.Camera;
 
 public class GameEngine implements Runnable
 {
+	
 	private Thread thread;
 	private Window window;
 	private Renderer renderer;
@@ -11,6 +12,7 @@ public class GameEngine implements Runnable
 	private AbstractGame game;
 	private Camera camera;
 
+	
 	private int width=1000, height=550;
 
 	private String title="Fighting Game";
@@ -34,17 +36,16 @@ public class GameEngine implements Runnable
 	{	
 		while(true)
 		{
-			game.update(this,1f);
-			game.render(this, renderer);
 			
+			game.update(this,1f);
 			input.update();
-			window.update();
+
 			renderer.clear();
+			game.render(this, renderer);
+			window.update();	
 			
 			try   {Thread.sleep(10);}
-			catch (InterruptedException e){};
-
-			
+			catch (InterruptedException e){};	
 		}
 	}
 	

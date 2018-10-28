@@ -1,5 +1,6 @@
 package Game;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import GameEngine.AbstractGame;
@@ -11,22 +12,29 @@ public class GameManager extends AbstractGame
 	
 	private ArrayList<GameObject> objects= new ArrayList<GameObject>();
 	private Camera camera;
-	public static int offX;
-	public static int offY;
+	public static int offX=0;
+	public static int offY=0;
+	public static int MX=0;
+	public static int MY=0;
+	public static boolean MB=false;
 	
 	public GameManager()
 	{
 		camera= new Camera();
-		objects.add(new UI());
-		objects.add(new player1());
-		objects.add(new player2());
+		objects.add(new Game.Rooms.A_ClassSelect());
+		objects.add(new Game.Rooms.C_Arena());
 	}
 	
 	public void update(GameEngine ge, float dt)
 	{
 		camera.update(ge,dt);
+		
 		offX=camera.getOffX();
 		offY=camera.getOffY();
+		
+		MX=ge.getInput().getMouseX();
+		MY=ge.getInput().getMouseY();
+		MB=ge.getInput().isKeyDown(MouseEvent.BUTTON1);
 		
 		for (int i=0;i<objects.size(); i++)
 		{

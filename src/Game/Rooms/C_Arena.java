@@ -1,27 +1,23 @@
-package Game;
+package Game.Rooms;
 
-import java.awt.event.MouseEvent;
+import Game.GameObject;
+import Game.Scripts;
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
 
-public class UI extends GameObject
+public class C_Arena extends GameObject
 {
 	private Image attack, parry, heal;
 	private Image panel, pointer;
-	
-	private int MX=0,MY=0;
-	
-	private int ax=100,ay=375;
-	private int px=100,py=425;
-	private int hx=100,hy=475;
-	
-	int offx=0;
-	int offy=0;
+	private int ax=2100,ay=375;
+	private int px=2100,py=425;
+	private int hx=2100,hy=475;
 	
 	private boolean activePointer=false;
-	private int Px=50,Py=0;
-	public UI()
+	private int Px=2050,Py=0;
+	
+	public C_Arena()
 	{
 		attack=new Image("/UI/Attack_Button.png");
 		parry=new Image("/UI/Parry_Button.png");
@@ -31,32 +27,23 @@ public class UI extends GameObject
 		pointer= new Image("/UI/Pointer2.png");
 	}
 	
-	public void start()
-	{
-		offx=0;
-		offy=0;
-	}
-	
 	public void update(GameEngine ge, float dt)
 	{
-		MX=ge.getInput().getMouseX();
-		MY=ge.getInput().getMouseY();
-		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>ax  && MX<(ax+attack.getW()) && MY>ay && MY<(ay+attack.getH()) )
+		if(Scripts.isClicked(attack,ax,ay))
 		{
 			System.out.println("Attack");
 			activePointer=true;
 			Py=ay;
-			
 		}
-		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>px  && MX<(px+parry.getW()) && MY>py && MY<(py+parry.getH()) )
+		
+		if(Scripts.isClicked(parry,px,py))
 		{
 			System.out.println("Parry");
 			activePointer=true;
-			Py=py;
-
-			
+			Py=py;	
 		}
-		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>hx  && MX<(hx+heal.getW()) && MY>hy && MY<(hy+heal.getH()) )
+		
+		if(Scripts.isClicked(heal,hx,hy))
 		{
 			System.out.println("Heal");
 			activePointer=true;
@@ -66,7 +53,7 @@ public class UI extends GameObject
 
 	public void render(GameEngine ge, Renderer r)
 	{
-		r.drawImage(panel,0, 350);
+		r.drawImage(panel,2000, 350);
 		
 		r.drawImage(attack,ax,ay);
 		r.drawImage(parry,px,py);

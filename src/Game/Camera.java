@@ -14,13 +14,17 @@ public class Camera
 	public void update(GameEngine ge, float dt)
 	{
 		
-		if(ge.getInput().isKey(KeyEvent.VK_D))
+		if(ge.getInput().isKey(KeyEvent.VK_1))
 		{
-			offX+=5;
+			offX=0;
 		}
-		if(ge.getInput().isKey(KeyEvent.VK_A))
+		if(ge.getInput().isKey(KeyEvent.VK_2))
 		{
-			offX-=5;
+			offX=1000;
+		}
+		if(ge.getInput().isKey(KeyEvent.VK_3))
+		{
+			offX=2000;
 		}
 		ge.getRenderer().setCamX((int)offX);
 		ge.getRenderer().setCamY((int)offY);
