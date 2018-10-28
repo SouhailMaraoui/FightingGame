@@ -1,6 +1,6 @@
 package GameEngine;
 
-import java.awt.event.KeyEvent;
+import Game.Camera;
 
 public class GameEngine implements Runnable
 {
@@ -9,6 +9,7 @@ public class GameEngine implements Runnable
 	private Renderer renderer;
 	private Input input;
 	private AbstractGame game;
+	private Camera camera;
 
 	private int width=1000, height=550;
 
@@ -37,7 +38,6 @@ public class GameEngine implements Runnable
 			game.render(this, renderer);
 			
 			input.update();
-			
 			window.update();
 			renderer.clear();
 			
@@ -72,4 +72,15 @@ public class GameEngine implements Runnable
 	{
 		return title;
 	}
+
+	public Renderer getRenderer()
+	{
+		return renderer;
+	}
+
+	public Camera getCamera()
+	{
+		return camera;
+	}
+
 }

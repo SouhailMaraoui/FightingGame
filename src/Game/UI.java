@@ -1,8 +1,6 @@
 package Game;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
@@ -12,13 +10,17 @@ public class UI extends GameObject
 	private Image attack, parry, heal;
 	private Image panel, pointer;
 	
+	private int MX=0,MY=0;
+	
 	private int ax=100,ay=375;
 	private int px=100,py=425;
 	private int hx=100,hy=475;
 	
+	int offx=0;
+	int offy=0;
+	
 	private boolean activePointer=false;
 	private int Px=50,Py=0;
-	
 	public UI()
 	{
 		attack=new Image("/UI/Attack_Button.png");
@@ -31,12 +33,14 @@ public class UI extends GameObject
 	
 	public void start()
 	{
+		offx=0;
+		offy=0;
 	}
 	
 	public void update(GameEngine ge, float dt)
 	{
-		int MX=ge.getInput().getMouseX();
-		int MY=ge.getInput().getMouseY();
+		MX=ge.getInput().getMouseX();
+		MY=ge.getInput().getMouseY();
 		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>ax  && MX<(ax+attack.getW()) && MY>ay && MY<(ay+attack.getH()) )
 		{
 			System.out.println("Attack");
@@ -44,7 +48,7 @@ public class UI extends GameObject
 			Py=ay;
 			
 		}
-		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>px  && MX<(py+parry.getW()) && MY>py && MY<(py+parry.getH()) )
+		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>px  && MX<(px+parry.getW()) && MY>py && MY<(py+parry.getH()) )
 		{
 			System.out.println("Parry");
 			activePointer=true;
@@ -52,12 +56,11 @@ public class UI extends GameObject
 
 			
 		}
-		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>hx  && MX<(hy+heal.getW()) && MY>hy && MY<(hy+heal.getH()) )
+		if(ge.getInput().isKeyDown(MouseEvent.BUTTON1) && MX>hx  && MX<(hx+heal.getW()) && MY>hy && MY<(hy+heal.getH()) )
 		{
 			System.out.println("Heal");
 			activePointer=true;
 			Py=hy;
-			
 		}
 	}
 

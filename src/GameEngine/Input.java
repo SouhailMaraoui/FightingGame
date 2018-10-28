@@ -6,16 +6,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import Game.GameManager;
+
 public class Input implements KeyListener,MouseListener,MouseMotionListener
-{
-	private final int BUTTONS_NUM=3;
-	private boolean[] buttons = new boolean[BUTTONS_NUM];
-	private boolean[] buttonsLast = new boolean[BUTTONS_NUM];
-	
+{	
 	private final int KEYS_NUM=256;
 	private boolean[] keys = new boolean[KEYS_NUM];
 	private boolean[] keysLast = new boolean[KEYS_NUM];
-	
 	private int mouseX,mouseY;
 	
 	public Input(GameEngine ge)
@@ -33,16 +30,14 @@ public class Input implements KeyListener,MouseListener,MouseMotionListener
 		{
 			keysLast[i]=keys[i];
 		}
-		for(int i=0; i<BUTTONS_NUM;i++)
-		{
-			buttonsLast[i]=buttons[i];
-		}
+
 	}
 
-	public boolean isButtonDown(int keyCode)
+	public boolean isKey(int keyCode)
 	{
-		return buttons[keyCode] /*&& !buttonsLast[keyCode]*/;
+		return keys[keyCode];
 	}
+	
 	public boolean isKeyDown(int keyCode)
 	{
 		return keys[keyCode] && !keysLast[keyCode];
@@ -66,8 +61,8 @@ public class Input implements KeyListener,MouseListener,MouseMotionListener
 	public void keyReleased		(KeyEvent e)	{keys[e.getKeyCode()]=false;}
 	public void keyTyped		(KeyEvent e)	{}
 
-	public int getMouseX()	{return mouseX;}
-	public int getMouseY()	{return mouseY;}
+	public int getMouseX()	{return mouseX+GameManager.offX;}
+	public int getMouseY()	{return mouseY+GameManager.offY;}
 
 	public boolean getKeys(int i)
 	{

@@ -8,12 +8,13 @@ public class Renderer
 {
 	private int pW,pH;
 	private int[] p;
+	private int camX,camY;
+	
 	public Renderer(GameEngine ge)
 	{
 		pW=ge.getWidth();
 		pH=ge.getHeight();
-		p=((DataBufferInt)ge.getWindow().getImage().getRaster().getDataBuffer()).getData();
-		
+		p=((DataBufferInt)ge.getWindow().getImage().getRaster().getDataBuffer()).getData();	
 	}
 	
 	public void clear()
@@ -23,13 +24,15 @@ public class Renderer
 	
 	public void setPixel(int x, int y, int value)
 	{
+		x-=camX;
+		y-=camY;
 		if ((x<0 || x>=pW || y<0 || y>=pH) || value == 0xffff00ff)
 		{
 			return;
 		}
-		p[x+y*pW]=value;
-		
+		p[x+y*pW]=value;	
 	}
+	
 	public void drawImage(Image image, int offX, int offY)
 	{
 		int newx=0;
@@ -44,5 +47,25 @@ public class Renderer
 				setPixel(x+offX,y+offY,image.getP()[x+y*image.getW()]);
 			}
 		}
+	}
+
+	public int getCamX()
+	{
+		return camX;
+	}
+
+	public void setCamX(int camX)
+	{
+		this.camX = camX;
+	}
+
+	public int getCamY()
+	{
+		return camY;
+	}
+
+	public void setCamY(int camY)
+	{
+		this.camY = camY;
 	}
 }
