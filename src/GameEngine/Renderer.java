@@ -29,7 +29,6 @@ public class Renderer
 	
 	public void clear()
 	{
-		//for (int i=0; i<p.length; i++)	{p[i]=0xffCADAFF;}
 		for (int i=0; i<p.length; i++)	{p[i]=0xffffffFF;}
 	}
 	
@@ -83,6 +82,17 @@ public class Renderer
 		}
 	}
 
+	public void drawRectangle(int offX,int offY,int width, int height, int color)
+	{
+		for(int y=0;y<height;y++)
+		{
+			for(int x=0;x<width;x++)
+			{
+				setPixel(x+offX,y+offY,color);
+			}
+		}
+	}
+	
 	public int getCamX()
 	{
 		return camX;

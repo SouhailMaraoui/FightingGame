@@ -68,6 +68,8 @@ public class A_ClassSelect extends GameObject
 		r.drawImage(mage,mx,my);
 		
 		r.drawNumber(000000,500,300);
+		
+		r.drawRectangle(20, 20, 21,500 , 0xff0a0a0a);
 	}
 
 }
