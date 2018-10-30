@@ -9,10 +9,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-
 public class Window 
 {
-	
 	private JFrame frame;
 	private BufferedImage image;
 	private Canvas canvas;
@@ -27,7 +25,6 @@ public class Window
 		canvas.setPreferredSize(s);
 		canvas.setMaximumSize(s);
 		canvas.setMinimumSize(s);
-		
 		
 		frame =new JFrame(ge.getTitle());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,5 +55,4 @@ public class Window
 	{
 		return canvas;
 	}
-	
 }

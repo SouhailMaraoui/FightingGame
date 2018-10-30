@@ -22,6 +22,7 @@ public class GameManager extends AbstractGame
 	{
 		camera= new Camera();
 		objects.add(new Game.Rooms.A_ClassSelect());
+		objects.add(new Game.Rooms.B_StatSelect());
 		objects.add(new Game.Rooms.C_Arena());
 	}
 	

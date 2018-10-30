@@ -8,6 +8,8 @@ import GameEngine.GFX.Image;
 
 public class A_ClassSelect extends GameObject
 {
+	private String classTag;
+	
 	private Image warrior, athlete, mage;
 	private Image next, player;
 	
@@ -15,6 +17,7 @@ public class A_ClassSelect extends GameObject
 	private int ax=400,ay=20;
 	private int mx=700,my=20;
 	private int Px=0, Py=245;
+
 	
 	private boolean activePointer=false;
 	
@@ -24,7 +27,7 @@ public class A_ClassSelect extends GameObject
 		athlete=new Image("/Sprites/Athlete/Athlete.png");
 		mage=new Image("/Sprites/Mage/Mage.png");
 		
-		next= new Image("/UI/NextRoom.png");
+		next= new Image("/UI/Next.png");
 	}
 	
 	public void update(GameEngine ge, float dt)
@@ -32,7 +35,7 @@ public class A_ClassSelect extends GameObject
 		if(Scripts.isClicked(warrior,wx,wy))
 		{
 			player= new Image("/UI/Warrior.png");
-			System.out.println("Warrior");
+			classTag="Warrior";
 			activePointer=true;
 			Px=wx;
 		}
@@ -40,7 +43,7 @@ public class A_ClassSelect extends GameObject
 		if(Scripts.isClicked(athlete,ax,ay))
 		{
 			player= new Image("/UI/Athlete.png");
-			System.out.println("Athlete");
+			classTag="Athlete";
 			activePointer=true;
 			Px=ax;	
 		}
@@ -48,7 +51,7 @@ public class A_ClassSelect extends GameObject
 		if(Scripts.isClicked(mage,mx,my))
 		{
 			player= new Image("/UI/Mage.png");
-			System.out.println("Mage");
+			classTag="Mage";
 			activePointer=true;
 			Px=mx;
 		}
@@ -67,9 +70,10 @@ public class A_ClassSelect extends GameObject
 		r.drawImage(athlete,ax,ay);
 		r.drawImage(mage,mx,my);
 		
-		r.drawNumber(000000,500,300);
-		
-		r.drawRectangle(20, 20, 21,500 , 0xff0a0a0a);
 	}
 
+	public String getClassTag()
+	{
+		return classTag;
+	}
 }

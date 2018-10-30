@@ -1,6 +1,8 @@
 package GameEngine;
 
 import java.awt.image.DataBufferInt;
+
+import Game.Scripts;
 import GameEngine.GFX.Image;
 
 public class Renderer
@@ -19,6 +21,9 @@ public class Renderer
 	Image n8=new Image("/Numbers/8.png");
 	Image n9=new Image("/Numbers/9.png");
 	Image n0=new Image("/Numbers/0.png");
+	
+	Image up=new Image("/UI/Next.png");
+	Image down=new Image("/UI/Previous.png");
 	
 	public Renderer(GameEngine ge)
 	{
@@ -91,6 +96,23 @@ public class Renderer
 				setPixel(x+offX,y+offY,color);
 			}
 		}
+	}
+	
+	public int setStat(int i,int x,int y)
+	{
+		int stat=i;
+		drawImage(down,x,y);
+		drawImage(up,x+200,y);
+		if(Scripts.isClicked(down,x, y))
+		{
+			stat--;
+		}
+		if(Scripts.isClicked(up,x+200, y))
+		{
+			stat++;
+		}
+		drawNumber(stat,x+110,y+15);
+		return stat;
 	}
 	
 	public int getCamX()
