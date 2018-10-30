@@ -2,6 +2,7 @@ package GameEngine;
 
 import java.awt.image.DataBufferInt;
 
+import Game.GameManager;
 import Game.Scripts;
 import GameEngine.GFX.Image;
 
@@ -83,7 +84,7 @@ public class Renderer
 			case '9':	drawImage(n9,x,y);break;
 			case '0':	drawImage(n0,x,y);break;
 			}
-			x+=10;
+			x+=25;
 		}
 	}
 
@@ -98,20 +99,20 @@ public class Renderer
 		}
 	}
 	
-	public int setStat(int i,int x,int y)
+	public int setStat(int i,int x,int y,int min,int max)
 	{
 		int stat=i;
 		drawImage(down,x,y);
 		drawImage(up,x+200,y);
-		if(Scripts.isClicked(down,x, y))
+		if(Scripts.isClicked(down,x, y) && stat>min)
 		{
 			stat--;
 		}
-		if(Scripts.isClicked(up,x+200, y))
+		if(Scripts.isClicked(up,x+200, y) && stat<max)
 		{
 			stat++;
 		}
-		drawNumber(stat,x+110,y+15);
+		drawNumber(stat,x+100,y+5);
 		return stat;
 	}
 	

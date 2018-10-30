@@ -33,8 +33,7 @@ public class GameEngine implements Runnable
 	public void run()
 	{	
 		while(true)
-		{
-			
+		{			
 			game.update(this,1f);
 			input.update();
 

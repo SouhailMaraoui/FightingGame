@@ -1,24 +1,26 @@
 package classes;
 
 import java.util.Random;
+import GameEngine.GameEngine;
 
-public class Class
+public class Classe
 {
-	private int exp;
-	private int force;
-	private int dexterity;
-	private int intelligence;
-	private int concentration;
-	private int vitality;
-
-	public Class(int force,int dexterity, int intelligence, int concentration, int vitality,int exp)
+	protected int force=0;
+	protected int dexterity=0;
+	protected int intelligence=0;
+	protected int concentration=0;
+	
+	public Classe(int force,int dexterity, int intelligence, int concentration)
 	{
 		this.force=force;
 		this.dexterity=dexterity;
 		this.intelligence=intelligence;
 		this.concentration=concentration;
-		this.vitality=vitality;
-		this.exp=exp;
+
+	}
+	
+	public void update(GameEngine ge, float dt)
+	{
 	}
 	
 	private int ifHit(int hit,int chance)
@@ -74,6 +76,7 @@ public class Class
 		}
 		return ifHit(deflect, chance);
 	}
+	
 	public int Heal(Weapon weapon)
 	{
 		int chance=0;
@@ -90,25 +93,5 @@ public class Class
 			heal=intelligence*weapon.getEfficacity()/100;
 		}
 		return ifHit(heal, chance);
-	}
-
-	public int getExp()
-	{
-		return exp;
-	}
-
-	public void setExp(int exp)
-	{
-		this.exp = exp;
-	}
-
-	public int getVitality()
-	{
-		return vitality;
-	}
-
-	public void setVitality(int vitality)
-	{
-		this.vitality = vitality;
 	}
 }

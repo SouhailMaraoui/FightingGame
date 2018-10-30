@@ -21,11 +21,20 @@ public class Camera
 		if(ge.getInput().isKey(KeyEvent.VK_2))
 		{
 			offX=1000;
+			GameManager.objects.add(new Game.Rooms.B_StatSelect());
 		}
 		if(ge.getInput().isKey(KeyEvent.VK_3))
 		{
 			offX=2000;
+			GameManager.objects.add(new Game.Rooms.C_Arena());
 		}
+		if(ge.getInput().isKey(KeyEvent.VK_ENTER) && Game.Rooms.A_ClassSelect.canNext)
+		{
+			offX=1000;
+			GameManager.objects.add(new Game.Rooms.B_StatSelect());
+			Game.Rooms.A_ClassSelect.canNext=false;
+		}
+		
 		ge.getRenderer().setCamX((int)offX);
 		ge.getRenderer().setCamY((int)offY);
 	}
@@ -36,5 +45,9 @@ public class Camera
 	public int getOffY()
 	{
 		return offY;
+	}
+	public void setOffX(int offX)
+	{
+		this.offX = offX;
 	}
 }
