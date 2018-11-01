@@ -28,11 +28,18 @@ public class Camera
 			offX=2000;
 			GameManager.objects.add(new Game.Rooms.C_Arena());
 		}
-		if(ge.getInput().isKey(KeyEvent.VK_ENTER) && Game.Rooms.A_ClassSelect.canNext)
+		
+		if(GameManager.EB && Game.Rooms.A_ClassSelect.canNext)
 		{
 			offX=1000;
 			GameManager.objects.add(new Game.Rooms.B_StatSelect());
 			Game.Rooms.A_ClassSelect.canNext=false;
+		}
+		if(GameManager.EB && Game.Rooms.B_StatSelect.canNext)
+		{
+			offX=2000;
+			GameManager.objects.add(new Game.Rooms.C_Arena());
+			Game.Rooms.B_StatSelect.canNext=false;
 		}
 		
 		ge.getRenderer().setCamX((int)offX);

@@ -13,10 +13,11 @@ public class B_StatSelect extends GameObject
 	
 	int i=0;
 	int exp=1;
-	int[] stat= {30,30,20,20};
+	int[] stat= {20,20,20,20};
 	int[][] statCond=new int[4][2];
 	boolean test=true;
 	
+	public static boolean canNext=false;
 	
 	public B_StatSelect()
 	{
@@ -78,6 +79,7 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[1], 1500, 155);r.drawImage(S2, 1100, 150);
 			r.drawNumber(stat[2], 1500, 205);r.drawImage(S3, 1100, 200);
 			r.drawNumber(stat[3], 1500, 255);r.drawImage(S4, 1100, 250);
+			canNext=true;
 		}
 	}
 	
@@ -85,9 +87,9 @@ public class B_StatSelect extends GameObject
 	{
 		if (A_ClassSelect.classTag=="Warrior")
 		{			
-			int force=stat[3];
-			int dexterity=stat[2];
-			int intelligence=stat[1];
+			int force=stat[0];
+			int dexterity=stat[1];
+			int intelligence=stat[2];
 			
 			//force-------------------------------------------------------
 			statCond[0][0]=20;
@@ -105,9 +107,9 @@ public class B_StatSelect extends GameObject
 		if (A_ClassSelect.classTag=="Athlete")
 		{			
 
-			int force=stat[3];
-			int dexterity=stat[2];
-			int intelligence=stat[1];
+			int force=stat[0];
+			int dexterity=stat[1];
+			int intelligence=stat[2];
 			
 			//force--------------------------------------------------------
 			statCond[0][0]=20;

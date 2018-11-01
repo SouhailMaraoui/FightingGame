@@ -11,6 +11,7 @@ import GameEngine.Renderer;
 public class GameManager extends AbstractGame
 {
 	
+	public static final boolean canNext = false;
 	public static ArrayList<GameObject> objects= new ArrayList<GameObject>();
 	private Camera camera;
 	public static int offX=0;
@@ -36,7 +37,7 @@ public class GameManager extends AbstractGame
 		MX=ge.getInput().getMouseX();
 		MY=ge.getInput().getMouseY();
 		MB=ge.getInput().isKeyDown(MouseEvent.BUTTON1);
-		EB=ge.getInput().isKeyDown(KeyEvent.VK_SPACE);
+		EB=ge.getInput().isKeyDown(KeyEvent.VK_ENTER);
 		
 		
 		for (int i=0;i<objects.size(); i++)
