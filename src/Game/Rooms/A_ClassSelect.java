@@ -1,30 +1,30 @@
 package Game.Rooms;
 
+import Classes.Classe;
+import Classes.Warrior;
+import Classes.Athlete;
+import Classes.Mage;
 import Game.GameObject;
 import Game.Scripts;
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
-import classes.Classe;
 
 public class A_ClassSelect extends GameObject
-{
-	public static String classTag="Warrior";
-	
+{	
+	private static Classe player;
 	private Image warrior, athlete, mage;
-	private Image player;
+	private Image image;
 	public static Classe classe;
 	
 	private int wx=100,wy=20;
 	private int ax=400,ay=20;
 	private int mx=700,my=20;
 	private int Px=0, Py=245;
-
 	
 	private boolean activePointer=false;
 	public static boolean canNext=false;
 
-	
 	public A_ClassSelect()
 	{
 		warrior=new Image("/Sprites/Warrior/Warrior.png");
@@ -36,9 +36,10 @@ public class A_ClassSelect extends GameObject
 	{
 		if(Scripts.isClicked(warrior,wx,wy))
 		{
-			classe=new Classe(25,25,25,25);
-			player= new Image("/UI/Warrior.png");
-			classTag="Warrior";
+			player=new Warrior();
+			player.setTag("Warrior");
+			
+			image= new Image("/UI/Warrior.png");
 			activePointer=true;
 			canNext=true;
 			Px=wx;
@@ -46,9 +47,10 @@ public class A_ClassSelect extends GameObject
 		
 		if(Scripts.isClicked(athlete,ax,ay))
 		{
-			classe=new Classe(25,25,25,25);
-			player= new Image("/UI/Athlete.png");
-			classTag="Athlete";
+			player=new Athlete();
+			player.setTag("Athlete");
+			
+			image= new Image("/UI/Athlete.png");
 			activePointer=true;
 			canNext=true;
 			Px=ax;	
@@ -56,9 +58,10 @@ public class A_ClassSelect extends GameObject
 
 		if(Scripts.isClicked(mage,mx,my))
 		{
-			classe=new Classe(25,25,25,25);
-			player= new Image("/UI/Mage.png");
-			classTag="Mage";
+			player=new Mage();
+			player.setTag("Mage");
+			
+			image= new Image("/UI/Mage.png");
 			activePointer=true;
 			canNext=true;
 			Px=mx;
@@ -69,16 +72,15 @@ public class A_ClassSelect extends GameObject
 	{
 		if(activePointer)
 		{
-			r.drawImage(player, Px, Py);
+			r.drawImage(image, Px, Py);
 		}
 		r.drawImage(warrior,wx,wy);
 		r.drawImage(athlete,ax,ay);
-		r.drawImage(mage,mx,my);
-		
+		r.drawImage(mage,mx,my);		
 	}
 
-	public String getClassTag()
+	public static Classe getPlayer()
 	{
-		return classTag;
+		return player;
 	}
 }

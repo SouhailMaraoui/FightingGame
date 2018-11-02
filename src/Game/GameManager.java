@@ -29,6 +29,8 @@ public class GameManager extends AbstractGame
 	
 	public void update(GameEngine ge, float dt)
 	{
+		
+		
 		camera.update(ge,dt);
 		
 		offX=camera.getOffX();

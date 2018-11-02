@@ -1,5 +1,6 @@
 package Game.Rooms;
 
+import Classes.Classe;
 import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
@@ -10,10 +11,10 @@ import GameEngine.GFX.Image;
 public class B_StatSelect extends GameObject
 {		
 	private Image S1,S2,S3,S4,S5;
-	
+	private Classe player;
 	int i=0;
 	int exp=1;
-	int[] stat= {20,20,20,20};
+	public static int[] stat= {20,20,20,20};
 	int[][] statCond=new int[4][2];
 	boolean test=true;
 	
@@ -21,12 +22,14 @@ public class B_StatSelect extends GameObject
 	
 	public B_StatSelect()
 	{
+		player=A_ClassSelect.getPlayer();
+		
 		S1=new Image("/UI/Stats/Force.png");
 		S2=new Image("/UI/Stats/Dexterity.png");
 		S3=new Image("/UI/Stats/Intelligence.png");
 		S4=new Image("/UI/Stats/Concentration.png");
 		
-		if (A_ClassSelect.classTag=="Mage")
+		if (player.getTag()=="Mage")
 		{
 			stat[0]=40; stat[1]=40;stat[2]=10;stat[3]=10;
 			
@@ -79,13 +82,15 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[1], 1500, 155);r.drawImage(S2, 1100, 150);
 			r.drawNumber(stat[2], 1500, 205);r.drawImage(S3, 1100, 200);
 			r.drawNumber(stat[3], 1500, 255);r.drawImage(S4, 1100, 250);
+			player.setStat(stat[0],stat[1],stat[2],stat[3]);
 			canNext=true;
+			if(GameManager.EB) {i=5;}
 		}
 	}
 	
 	public int[][] statCond()
 	{
-		if (A_ClassSelect.classTag=="Warrior")
+		if (player.getTag()=="Warrior")
 		{			
 			int force=stat[0];
 			int dexterity=stat[1];
@@ -104,7 +109,7 @@ public class B_StatSelect extends GameObject
 			statCond[3][0]=0;
 			statCond[3][1]=100+exp-force-dexterity-intelligence;
 		}
-		if (A_ClassSelect.classTag=="Athlete")
+		if (player.getTag()=="Athlete")
 		{			
 
 			int force=stat[0];
@@ -124,7 +129,7 @@ public class B_StatSelect extends GameObject
 			statCond[3][0]=20;
 			statCond[3][1]=100+exp-force-dexterity-intelligence;
 		}
-		if (A_ClassSelect.classTag=="Mage")
+		if (player.getTag()=="Mage")
 		{
 			int intelligence=stat[1];
 			int concentration=stat[0];

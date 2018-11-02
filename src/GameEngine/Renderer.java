@@ -2,7 +2,7 @@ package GameEngine;
 
 import java.awt.image.DataBufferInt;
 
-import Game.GameManager;
+import Classes.Weapon;
 import Game.Scripts;
 import GameEngine.GFX.Image;
 
@@ -64,6 +64,21 @@ public class Renderer
 			}
 		}
 	}
+	public void drawImageReversed(Image image, int offX, int offY)
+	{
+		int newx=0;
+		int newy=0;
+		int newW=image.getW();
+		int newH=image.getH();
+		
+		for(int y=newy;y<newH;y++)
+		{
+			for(int x=newx;x<newW;x++)
+			{
+				setPixel(x+offX,y+offY,image.getP()[newW-x-1+y*image.getW()]);
+			}
+		}
+	}
 	
 	public void drawNumber(int i,int x, int y)
 	{
@@ -98,7 +113,7 @@ public class Renderer
 			}
 		}
 	}
-	
+
 	public int setStat(int i,int x,int y,int min,int max)
 	{
 		int stat=i;

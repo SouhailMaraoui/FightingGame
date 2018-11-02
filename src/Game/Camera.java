@@ -1,7 +1,5 @@
 package Game;
 
-import java.awt.event.KeyEvent;
-
 import GameEngine.GameEngine;
 
 public class Camera
@@ -13,22 +11,6 @@ public class Camera
 	}
 	public void update(GameEngine ge, float dt)
 	{
-		
-		if(ge.getInput().isKey(KeyEvent.VK_1))
-		{
-			offX=0;
-		}
-		if(ge.getInput().isKey(KeyEvent.VK_2))
-		{
-			offX=1000;
-			GameManager.objects.add(new Game.Rooms.B_StatSelect());
-		}
-		if(ge.getInput().isKey(KeyEvent.VK_3))
-		{
-			offX=2000;
-			GameManager.objects.add(new Game.Rooms.C_Arena());
-		}
-		
 		if(GameManager.EB && Game.Rooms.A_ClassSelect.canNext)
 		{
 			offX=1000;

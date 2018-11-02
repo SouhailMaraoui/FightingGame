@@ -1,22 +1,24 @@
-package classes;
+package Classes;
 
 public class Weapon
 {
 	private String tag;
+		
 	private int maniabilty;
 	private int impact;
 	private int parade;
+	
 	private int facility;
 	private int efficacity;
 	private int protection;
 	
-	private Weapon(int maniabilty,int impact, int parade)
+	public Weapon(int maniabilty,int impact, int parade)
 	{
 		this.maniabilty=maniabilty;
 		this.impact=impact;
 		this.parade=parade;
 	}
-
+	
 	public int getManiabilty()
 	{
 		return maniabilty;
@@ -36,7 +38,12 @@ public class Weapon
 	{
 		return facility;
 	}
-
+	
+	public void setTag(String tag)
+	{
+		this.tag = tag;
+	}
+	
 	public String getTag()
 	{
 		return tag;
@@ -46,15 +53,10 @@ public class Weapon
 	{
 		return efficacity;
 	}
-	public void setTag(String tag)
-	{
-		this.tag = tag;
-	}
+
 
 	public int getProtection()
 	{
 		return protection;
 	}
-
-
 }

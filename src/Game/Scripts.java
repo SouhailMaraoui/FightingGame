@@ -14,10 +14,26 @@ public class Scripts
 		return GameManager.MX>x2  && GameManager.MX<(x2+image.getW()) && GameManager.MY>y2 && GameManager.MY<(y2+image.getH()) && GameManager.MB;
 	}
 	
+	public static boolean isHovered(Image image,int x2, int y2)
+	{
+		return GameManager.MX>x2  && GameManager.MX<(x2+image.getW()) && GameManager.MY>y2 && GameManager.MY<(y2+image.getH());
+	}
+	
 	public static int max(int a,int b)
 	{
 		if (a>b)
 			return a;
 		return b;
 	}
+	public static boolean isSinT(String S,String[] T)
+	{
+		for(int i=0;i<T.length;i++)
+		{
+			if(S==T[i])
+				return true;
+		}
+		return false;
+	}
+	
+	
 }

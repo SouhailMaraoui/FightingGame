@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 
 public class Image
 {
+	private String tag;
+	
 	private int w,h;
 	private int[] p;
 	
@@ -53,5 +55,15 @@ public class Image
 	public void setP(int[] p)
 	{
 		this.p = p;
+	}
+
+	public String getTag()
+	{
+		return tag;
+	}
+
+	public void setTag(String tag)
+	{
+		this.tag = tag;
 	}
 }
