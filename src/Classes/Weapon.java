@@ -1,8 +1,11 @@
 package Classes;
 
+import GameEngine.GFX.Image;
+
 public class Weapon
 {
 	private String tag;
+	private Image image;
 		
 	private int maniabilty;
 	private int impact;
@@ -59,4 +62,15 @@ public class Weapon
 	{
 		return protection;
 	}
+	
+	public void setImage(String path)
+	{
+		this.image=new Image(path);
+	}
+	
+	public Image getImage()
+	{
+		return this.image;
+	}
+	
 }

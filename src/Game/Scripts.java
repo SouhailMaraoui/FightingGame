@@ -1,5 +1,7 @@
 package Game;
 
+import java.util.Random;
+
 import GameEngine.GFX.Image;
 
 public class Scripts
@@ -17,6 +19,34 @@ public class Scripts
 	public static boolean isHovered(Image image,int x2, int y2)
 	{
 		return GameManager.MX>x2  && GameManager.MX<(x2+image.getW()) && GameManager.MY>y2 && GameManager.MY<(y2+image.getH());
+	}
+	
+	public static boolean isTrueInList(boolean[][] T)
+	{
+		for(int i=0;i<T.length;i++)
+		{
+			for(int j=0;j<T[0].length;j++)
+			{
+				if(T[i][j]==true)
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static int ifHit(int hit,float chance)
+	{
+		int h=0;
+		Random r= new Random(); 
+		float i=r.nextFloat();
+		if(i<chance)
+		{
+			h=hit;
+		}
+		System.out.println("chance= "+chance+" (i="+i+"), hit= "+h);
+		return h;
 	}
 	
 	public static int max(int a,int b)

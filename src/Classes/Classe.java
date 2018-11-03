@@ -35,20 +35,7 @@ public class Classe
 	
 	public void update(GameEngine ge, float dt)
 	{
-		//player=A_ClassSelect.getPlayer();
-	}
-	
-	private int ifHit(int hit,float chance)
-	{
-		int h=0;
-		Random r= new Random(); 
-		float i=r.nextFloat();
-		if(i<chance)
-		{
-			h=hit;
-		}
-		System.out.println("chance= "+chance+" (i="+i+"), hit= "+h);
-		return h;
+		
 	}
 	
 	public int[] Attack(Weapon weapon)
@@ -125,10 +112,6 @@ public class Classe
 		return image;
 	}
 
-	public static String[][] getWeaponTag()
-	{		
-		return weaponTag;
-	}
 	public static Weapon[][] getWeapon()
 	{		
 		return weapon;

@@ -15,13 +15,13 @@ public class Athlete extends Classe
 
 	public Athlete()
 	{	
-		Weapon staff=new Weapon(10,10,10);
-		Weapon dagger=new Weapon(10,10,10);
-		Weapon potion=new Weapon(10,10,10);
+		Weapon staff=new Weapon(10,10,10);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon dagger=new Weapon(10,10,10);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
+		Weapon potion=new Weapon(10,10,10);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
 		
 		Ix=2100;Iy=100;
-		A1x=2100;A1y=100;
-		A2x=2500;A2y=100;
+		A1x=2610;A1y=100;
+		A2x=2100;A2y=100;
 		Px=2100;Py=100;
 		Hx=2100;Hy=100;
 		
@@ -33,8 +33,8 @@ public class Athlete extends Classe
 		
 		image[0]=I;image[1]=A1;image[2]=A2;image[3]=P;image[4]=H;
 		
-		imagePos[0][0]=Ix;imagePos[1][0]=A1x;imagePos[2][0]=A1x;imagePos[3][0]=Px;imagePos[4][0]=Hx;
-		imagePos[0][1]=Iy;imagePos[1][1]=A1y;imagePos[2][1]=A1y;imagePos[3][1]=Py;imagePos[4][1]=Hy;
+		imagePos[0][0]=Ix;imagePos[1][0]=A1x;imagePos[2][0]=A2x;imagePos[3][0]=Px;imagePos[4][0]=Hx;
+		imagePos[0][1]=Iy;imagePos[1][1]=A1y;imagePos[2][1]=A2y;imagePos[3][1]=Py;imagePos[4][1]=Hy;
 		
 		weaponTag[0][0]="Staff";weaponTag[0][1]="Dagger";
 		weaponTag[1][0]="Staff" ;  

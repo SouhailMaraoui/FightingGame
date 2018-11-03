@@ -3,8 +3,12 @@ package Game.Players;
 import Classes.Classe;
 import Classes.Weapon;
 import Classes.Warrior;
+
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import Classes.Athlete;
 import Classes.Mage;
+import Game.GameManager;
 import Game.GameObject;
 import Game.Rooms.A_ClassSelect;
 import Game.Rooms.B_StatSelect;
@@ -21,6 +25,8 @@ public class Player extends GameObject
 	private Image[] image;
 	private int[][] imagePos;
 	private int px,py;
+	
+	public static int[] playerAction;
 	
 	public static boolean[][] T;
 
@@ -47,27 +53,34 @@ public class Player extends GameObject
 			px=imagePos[0][0];py=imagePos[0][1];
 		}
 		
-		T= C_Arena.T;
+		T= C_Arena.T2;
+
 		for(int i=0;i<T.length;i++)
 		{
-			for(int j=1;j<T[0].length;j++)
+			for(int j=0;j<T[0].length;j++)
 			{
-				if(weapon[i][j-1]!=null)
+				if(weapon[i][j]!=null)
 				{
 					k+=1;
-					if(T[i][j])
+					if(C_Arena.T1[i])
 					{
-						Fcount=60;
-						C_Arena.T[i][0]=C_Arena.T[i][j]=false;
-						C_Arena.activePointer=false;
-						if(i==0) {p1.Attack(weapon[i][j-1]);}
-						if(i==1) {p1.Parry(weapon[i][j-1]);}
-						if(i==2) {p1.Heal(weapon[i][j-1]);}
+						if(i==0) {playerAction=p1.Attack(weapon[i][j]);}
+						if(i==1) {playerAction=p1.Parry(weapon[i][j]);}
+						if(i==2) {playerAction=p1.Heal(weapon[i][j]);}
 						
-						if(Fcount>0)
+						if(GameManager.MB && T[i][j])
 						{
-							player=image[k];
-							px=imagePos[k][0];py=imagePos[k][1];
+							C_Arena.weaponList.clear();
+							Fcount=60;
+							C_Arena.T1[i]=C_Arena.T2[i][j]=false;
+							C_Arena.activePointer=false;
+							
+							if(Fcount>0)
+							{
+								player=image[k];
+								px=imagePos[k][0];py=imagePos[k][1];
+							}
+							
 						}
 					}
 				}
