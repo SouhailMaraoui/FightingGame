@@ -1,8 +1,6 @@
 package GameEngine;
 
 import java.awt.image.DataBufferInt;
-
-import Classes.Weapon;
 import Game.Scripts;
 import GameEngine.GFX.Image;
 

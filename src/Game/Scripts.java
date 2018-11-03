@@ -36,11 +36,11 @@ public class Scripts
 		return false;
 	}
 	
-	public static int ifHit(int hit,float chance)
+	public static int ifHit(int hit,int chance)
 	{
 		int h=0;
 		Random r= new Random(); 
-		float i=r.nextFloat();
+		float i=r.nextInt(100);
 		if(i<chance)
 		{
 			h=hit;

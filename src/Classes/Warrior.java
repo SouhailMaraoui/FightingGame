@@ -19,9 +19,9 @@ public class Warrior extends Classe
 
 	public Warrior()
 	{		
-		Weapon sword=new Weapon(10,10,10);	sword.setTag("Sword"); 	sword.setImage("/UI/Info/Sword.png");
+		Weapon sword=new Weapon(30000,1000,1000);	sword.setTag("Sword"); 	sword.setImage("/UI/Info/Sword.png");
 		Weapon shield=new Weapon(10,10,10);	shield.setTag("Shield");shield.setImage("/UI/Info/Shield.png");
-		Weapon banner=new Weapon(10,10,10);	banner.setTag("Banner");banner.setImage("/UI/Info/Banner.png");
+		Weapon banner=new Weapon(40000,10,10);	banner.setTag("Banner");banner.setImage("/UI/Info/Banner.png");
 		
 		Ix=2100;Iy=100;
 		Ax=2500;Ay=100;

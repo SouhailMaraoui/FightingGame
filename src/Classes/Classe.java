@@ -1,8 +1,5 @@
 package Classes;
 
-import java.util.Random;
-
-import Game.Rooms.A_ClassSelect;
 import GameEngine.GameEngine;
 import GameEngine.GFX.Image;
 
@@ -13,6 +10,8 @@ public class Classe
 	protected int dexterity=0;
 	protected int intelligence=0;
 	protected int concentration=0;
+	
+	protected int vitatlity;
 	
 	public static Image[] image=new Image[5];
 	public static int[][] imagePos=new int[5][2];
@@ -35,7 +34,6 @@ public class Classe
 	
 	public void update(GameEngine ge, float dt)
 	{
-		
 	}
 	
 	public int[] Attack(Weapon weapon)
@@ -87,7 +85,7 @@ public class Classe
 		int chance=0;
 		int heal=0;
 		
-		if(weapon.getTag()=="Potion")
+		if(weapon.getTag()=="Potion" || weapon.getTag()=="Banner")
 		{
 			chance=dexterity*weapon.getFacility()/10000;
 			heal=dexterity*weapon.getEfficacity()/100;
@@ -97,6 +95,7 @@ public class Classe
 			chance=concentration*weapon.getFacility()/10000;
 			heal=intelligence*weapon.getEfficacity()/100;
 		}
+		
 		int[] r= {heal, chance};
 		return r;
 	}
@@ -125,5 +124,15 @@ public class Classe
 	public void setTag(String tag)
 	{
 		this.tag = tag;
+	}
+
+	public int getVitatlity()
+	{
+		return vitatlity;
+	}
+
+	public void setVitatlity(int vitatlity)
+	{
+		this.vitatlity = vitatlity;
 	}
 }

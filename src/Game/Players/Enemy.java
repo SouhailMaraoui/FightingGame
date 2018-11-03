@@ -1,14 +1,14 @@
 package Game.Players;
 
+import Classes.Classe;
 import Game.GameObject;
-import Game.Rooms.A_ClassSelect;
-import Game.Rooms.C_Arena;
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
 
 public class Enemy extends GameObject
 {
+	private static Classe p2;
 	private Image enemy,I,A,P,H;
 	private int px,py;
 	private int Ix,Iy;
@@ -22,6 +22,9 @@ public class Enemy extends GameObject
 	
 	public Enemy()
 	{
+		p2=new Classe();
+		p2.setStat(60,60, 60, 60);
+		p2.setVitatlity(200);
 		Ix=2100;Iy=100;
 		Ax=2100;Ay=100;
 		Px=2100;Py=100;
@@ -47,5 +50,12 @@ public class Enemy extends GameObject
 			else if(Hing) {enemy=H;px=Hx;py=Hy;}
 		}
 		r.drawImageReversed(enemy, px+600, py);
+		
+		r.drawNumber(p2.getVitatlity(), 2900, 0);
+	}
+
+	public static Classe getP2()
+	{
+		return p2;
 	}
 }

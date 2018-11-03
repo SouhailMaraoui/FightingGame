@@ -14,7 +14,7 @@ public class B_StatSelect extends GameObject
 	private Classe player;
 	int i=0;
 	int exp=1;
-	public static int[] stat= {20,20,20,20};
+	public static int[] stat=new int[4];
 	int[][] statCond=new int[4][2];
 	boolean test=true;
 	
@@ -29,6 +29,14 @@ public class B_StatSelect extends GameObject
 		S3=new Image("/UI/Stats/Intelligence.png");
 		S4=new Image("/UI/Stats/Concentration.png");
 		
+		if (player.getTag()=="Warrior")
+		{
+			stat[0]=40; stat[1]=40;stat[2]=0;stat[3]=0;
+		}
+		if (player.getTag()=="Athlete")
+		{
+			stat[0]=25; stat[1]=25;stat[2]=25;stat[3]=25;
+		}
 		if (player.getTag()=="Mage")
 		{
 			stat[0]=40; stat[1]=40;stat[2]=10;stat[3]=10;
@@ -83,6 +91,7 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[2], 1500, 205);r.drawImage(S3, 1100, 200);
 			r.drawNumber(stat[3], 1500, 255);r.drawImage(S4, 1100, 250);
 			player.setStat(stat[0],stat[1],stat[2],stat[3]);
+			player.setVitatlity(200+3-stat[0]-stat[1]-stat[2]-stat[3]);
 			canNext=true;
 			if(GameManager.EB) {i=5;}
 		}

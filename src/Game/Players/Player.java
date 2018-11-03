@@ -2,16 +2,10 @@ package Game.Players;
 
 import Classes.Classe;
 import Classes.Weapon;
-import Classes.Warrior;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
-import Classes.Athlete;
-import Classes.Mage;
 import Game.GameManager;
 import Game.GameObject;
+import Game.Scripts;
 import Game.Rooms.A_ClassSelect;
-import Game.Rooms.B_StatSelect;
 import Game.Rooms.C_Arena;
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
@@ -20,6 +14,7 @@ import GameEngine.GFX.Image;
 public class Player extends GameObject
 {
 	private static Classe p1=A_ClassSelect.getPlayer();
+	private static Classe p2=Enemy.getP2();
 	
 	private Image player;
 	private Image[] image;
@@ -75,6 +70,10 @@ public class Player extends GameObject
 							C_Arena.T1[i]=C_Arena.T2[i][j]=false;
 							C_Arena.activePointer=false;
 							
+							if(i==0) {p2.setVitatlity(p2.getVitatlity()-Scripts.ifHit(playerAction[0],playerAction[1]));}
+							//if(i==1) {p1.setVitatlity(p1.getVitatlity()+Scripts.ifHit(playerAction[0],playerAction[1]));}
+							if(i==2) {p1.setVitatlity(p1.getVitatlity()+Scripts.ifHit(playerAction[0],playerAction[1]));}
+							
 							if(Fcount>0)
 							{
 								player=image[k];
@@ -86,7 +85,7 @@ public class Player extends GameObject
 				}
 			}
 		}
-		if(Fcount>0) {Fcount-=1;};
+		if(Fcount>0) {Fcount-=1;}
 	}
 	
 	public void render(GameEngine ge, Renderer r)

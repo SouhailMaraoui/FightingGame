@@ -112,13 +112,15 @@ public class C_Arena extends GameObject
 		{
 			r.drawImage(hit,2700,375);
 			r.drawImage(chance,2700,425);
-			r.drawNumber(Player.playerAction[0], 2805, 385);
-			r.drawNumber(Player.playerAction[1], 2805, 435);
+			r.drawNumber((int)Player.playerAction[0], 2805, 385);
+			r.drawNumber((int)Player.playerAction[1], 2805, 435);
 		}
 		for(Image i:weaponList)
 		{
 			r.drawImage(i, Ix, Iy);
 			Iy+=50;
 		}
+		
+		r.drawNumber(player.getVitatlity(), 2000, 0);
 	}
 }

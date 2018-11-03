@@ -11,10 +11,6 @@ public class Weapon
 	private int impact;
 	private int parade;
 	
-	private int facility;
-	private int efficacity;
-	private int protection;
-	
 	public Weapon(int maniabilty,int impact, int parade)
 	{
 		this.maniabilty=maniabilty;
@@ -39,7 +35,17 @@ public class Weapon
 	
 	public int getFacility()
 	{
-		return facility;
+		return maniabilty;
+	}
+	
+	public int getEfficacity()
+	{
+		return impact;
+	}
+
+	public int getProtection()
+	{
+		return parade;
 	}
 	
 	public void setTag(String tag)
@@ -50,17 +56,6 @@ public class Weapon
 	public String getTag()
 	{
 		return tag;
-	}
-	
-	public int getEfficacity()
-	{
-		return efficacity;
-	}
-
-
-	public int getProtection()
-	{
-		return protection;
 	}
 	
 	public void setImage(String path)
