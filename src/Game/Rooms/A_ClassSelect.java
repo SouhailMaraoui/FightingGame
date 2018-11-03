@@ -36,6 +36,8 @@ public class A_ClassSelect extends GameObject
 	{
 		if(Scripts.isClicked(warrior,wx,wy))
 		{
+			player=null;
+
 			player=new Warrior();
 			player.setTag("Warrior");
 			
@@ -47,6 +49,8 @@ public class A_ClassSelect extends GameObject
 		
 		if(Scripts.isClicked(athlete,ax,ay))
 		{
+			player=null;
+
 			player=new Athlete();
 			player.setTag("Athlete");
 			
@@ -58,6 +62,8 @@ public class A_ClassSelect extends GameObject
 
 		if(Scripts.isClicked(mage,mx,my))
 		{
+			player=null;
+
 			player=new Mage();
 			player.setTag("Mage");
 			

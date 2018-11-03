@@ -6,6 +6,7 @@ import GameEngine.GFX.Image;
 public class Classe
 {
 	private String tag;
+	
 	protected int force=0;
 	protected int dexterity=0;
 	protected int intelligence=0;
@@ -15,7 +16,6 @@ public class Classe
 	
 	public static Image[] image=new Image[5];
 	public static int[][] imagePos=new int[5][2];
-	public static String[][] weaponTag=new String[3][2];
 	public static Weapon[][] weapon=new Weapon[3][2];
 	
 	public Classe()
@@ -29,11 +29,11 @@ public class Classe
 		this.dexterity=dexterity;
 		this.intelligence=intelligence;
 		this.concentration=concentration;
-
 	}
 	
 	public void update(GameEngine ge, float dt)
 	{
+		
 	}
 	
 	public int[] Attack(Weapon weapon)

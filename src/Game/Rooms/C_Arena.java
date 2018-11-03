@@ -19,6 +19,8 @@ public class C_Arena extends GameObject
 	public static ArrayList<Image> weaponList= new ArrayList<Image>();
 	private Weapon[][] weapon;
 	
+	public static boolean myTurn=true;
+	
 	private Image attack, parry, heal;
 	private Image hit,chance;
 	private Image panel, pointer;
@@ -59,9 +61,9 @@ public class C_Arena extends GameObject
 
 	public void update(GameEngine ge, float dt)
 	{
-		if(Scripts.isClicked(attack,ax,ay))	 {T1[0]=true;T1[1]=false;T1[2]=false;}
-		if(Scripts.isClicked(parry,px,py))	 {T1[0]=false;T1[1]=true;T1[2]=false;}
-		if(Scripts.isClicked(heal,hx,hy))	 {T1[0]=false;T1[1]=false;T1[2]=true;}
+		if(myTurn && Scripts.isClicked(attack,ax,ay))	 {T1[0]=true;T1[1]=false;T1[2]=false;}
+		if(myTurn && Scripts.isClicked(parry,px,py))	 {T1[0]=false;T1[1]=true;T1[2]=false;}
+		if(myTurn && Scripts.isClicked(heal,hx,hy))	 {T1[0]=false;T1[1]=false;T1[2]=true;}
 
 		for(int i=0;i<T1.length;i++)
 		{

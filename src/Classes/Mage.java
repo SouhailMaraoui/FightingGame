@@ -14,8 +14,9 @@ public class Mage extends Classe
 	
 	public Mage()
 	{		
-		Weapon staff=new Weapon(10,10,10); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon grimoire=new Weapon(10,10,10);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
+		
+		Weapon staff=new Weapon(20000,10,10); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon grimoire=new Weapon(20000,10,10);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
 		
 		Ix=2100;Iy=100;
 		Ax=2100;Ay=50;
@@ -30,15 +31,10 @@ public class Mage extends Classe
 		image[0]=I;image[1]=A;image[2]=P;image[3]=H;
 		
 		imagePos[0][0]=Ix;imagePos[1][0]=Ax;imagePos[2][0]=Px;imagePos[3][0]=Hx;
-		imagePos[0][1]=Iy;imagePos[1][1]=Ay;imagePos[2][1]=Py;imagePos[3][1]=Hy;
-		
-		weaponTag[0][0]="Staff";
-		weaponTag[1][0]="Staff" ;
-		weaponTag[2][0]="Grimoire";  
-		
+		imagePos[0][1]=Iy;imagePos[1][1]=Ay;imagePos[2][1]=Py;imagePos[3][1]=Hy;		
 
-		weapon[0][0]=staff;
-		weapon[1][0]=staff ; 
-		weapon[2][0]=grimoire;
+		weapon[0][0]=staff;		weapon[0][1]=null;
+		weapon[1][0]=staff ; 	weapon[1][1]=null;
+		weapon[2][0]=grimoire;	weapon[2][1]=null;
 	}
 }

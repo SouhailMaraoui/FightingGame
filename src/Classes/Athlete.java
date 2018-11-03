@@ -15,9 +15,9 @@ public class Athlete extends Classe
 
 	public Athlete()
 	{	
-		Weapon staff=new Weapon(10,10,10);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon dagger=new Weapon(10,10,10);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
-		Weapon potion=new Weapon(10,10,10);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
+		Weapon staff=new Weapon(20000,10,10);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon dagger=new Weapon(20000,10,10);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
+		Weapon potion=new Weapon(20000,10,10);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
 		
 		Ix=2100;Iy=100;
 		A1x=2610;A1y=100;
@@ -35,14 +35,9 @@ public class Athlete extends Classe
 		
 		imagePos[0][0]=Ix;imagePos[1][0]=A1x;imagePos[2][0]=A2x;imagePos[3][0]=Px;imagePos[4][0]=Hx;
 		imagePos[0][1]=Iy;imagePos[1][1]=A1y;imagePos[2][1]=A2y;imagePos[3][1]=Py;imagePos[4][1]=Hy;
-		
-		weaponTag[0][0]="Staff";weaponTag[0][1]="Dagger";
-		weaponTag[1][0]="Staff" ;  
-		weaponTag[2][0]="Potion";  
-		
 
 		weapon[0][0]=dagger;weapon[0][1]=staff; 
-		weapon[1][0]=staff ; 
-		weapon[2][0]=potion;	
+		weapon[1][0]=staff ;weapon[1][1]=null; 
+		weapon[2][0]=potion;weapon[2][1]=null; 
 	}
 }

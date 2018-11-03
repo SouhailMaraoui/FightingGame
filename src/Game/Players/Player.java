@@ -21,6 +21,9 @@ public class Player extends GameObject
 	private int[][] imagePos;
 	private int px,py;
 	
+	private boolean parrying=false;
+	private static int toBeParried=0;
+	
 	public static int[] playerAction;
 	
 	public static boolean[][] T;
@@ -42,7 +45,14 @@ public class Player extends GameObject
 	public void update(GameEngine ge, float dt)
 	{
 		int k=0;
-		if(Fcount==0)
+		
+		if(parrying && C_Arena.myTurn)
+		{
+			parrying=false;
+			toBeParried=0;
+		}
+		
+		if(Fcount==0 && !parrying)
 		{
 			player=image[0];
 			px=imagePos[0][0];py=imagePos[0][1];
@@ -50,6 +60,8 @@ public class Player extends GameObject
 		
 		T= C_Arena.T2;
 
+		
+		
 		for(int i=0;i<T.length;i++)
 		{
 			for(int j=0;j<T[0].length;j++)
@@ -65,13 +77,21 @@ public class Player extends GameObject
 						
 						if(GameManager.MB && T[i][j])
 						{
+							
+							C_Arena.myTurn=false;
 							C_Arena.weaponList.clear();
 							Fcount=60;
 							C_Arena.T1[i]=C_Arena.T2[i][j]=false;
 							C_Arena.activePointer=false;
 							
-							if(i==0) {p2.setVitatlity(p2.getVitatlity()-Scripts.ifHit(playerAction[0],playerAction[1]));}
-							//if(i==1) {p1.setVitatlity(p1.getVitatlity()+Scripts.ifHit(playerAction[0],playerAction[1]));}
+							if(i==0) 
+							{
+								int myDamage=Scripts.ifHit(playerAction[0],playerAction[1]);
+								if(myDamage>Enemy.getToBeParried())
+								{p2.setVitatlity(p2.getVitatlity()+Enemy.getToBeParried()-myDamage);}
+								
+							}
+							if(i==1) {parry();}
 							if(i==2) {p1.setVitatlity(p1.getVitatlity()+Scripts.ifHit(playerAction[0],playerAction[1]));}
 							
 							if(Fcount>0)
@@ -79,7 +99,7 @@ public class Player extends GameObject
 								player=image[k];
 								px=imagePos[k][0];py=imagePos[k][1];
 							}
-							
+							Enemy.AITurn=true;
 						}
 					}
 				}
@@ -88,8 +108,23 @@ public class Player extends GameObject
 		if(Fcount>0) {Fcount-=1;}
 	}
 	
+	public void parry()
+	{
+		parrying=true;
+		toBeParried=Scripts.ifHit(playerAction[0],playerAction[1]);
+	}
+	
 	public void render(GameEngine ge, Renderer r)
 	{
 		r.drawImage(player, px, py);
+		if(toBeParried!=0)
+		{
+			r.drawNumber(toBeParried, 2200, 0);
+		}
+	}
+
+	public static int getToBeParried()
+	{
+		return toBeParried;
 	}
 }
