@@ -4,6 +4,7 @@ import Classes.Classe;
 import Classes.Warrior;
 import Classes.Athlete;
 import Classes.Mage;
+import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
 import GameEngine.GameEngine;
@@ -14,7 +15,7 @@ public class A_ClassSelect extends GameObject
 {	
 	private static Classe player;
 	private Image warrior, athlete, mage;
-	private Image image;
+	private Image image,wallpaper,background;
 	public static Classe classe;
 	
 	private int wx=100,wy=20;
@@ -27,13 +28,22 @@ public class A_ClassSelect extends GameObject
 
 	public A_ClassSelect()
 	{
+		GameManager.End=false;
+
+		player=null;
+		
+		wallpaper=new Image("/Wallpaper.png");
+		background=new Image("/Background.png");
+
+
 		warrior=new Image("/Sprites/Warrior/Warrior.png");
 		athlete=new Image("/Sprites/Athlete/Athlete.png");
 		mage=new Image("/Sprites/Mage/Mage.png");
+		
 	}
 	
 	public void update(GameEngine ge, float dt)
-	{
+	{		
 		if(Scripts.isClicked(warrior,wx,wy))
 		{
 			player=null;
@@ -76,6 +86,8 @@ public class A_ClassSelect extends GameObject
 
 	public void render(GameEngine ge, Renderer r)
 	{
+		r.drawImage(background, 2000, 0);
+		r.drawImage(wallpaper,0,0);
 		if(activePointer)
 		{
 			r.drawImage(image, Px, Py);

@@ -1,7 +1,6 @@
 package Game;
 
 import java.util.Random;
-
 import GameEngine.GFX.Image;
 
 public class Scripts
@@ -40,12 +39,12 @@ public class Scripts
 	{
 		int h=0;
 		Random r= new Random(); 
-		float i=r.nextInt(100);
+		int i=r.nextInt(100);
 		if(i<chance)
 		{
 			h=hit;
 		}
-		System.out.println("chance= "+chance+" (i="+i+"), hit= "+h);
+		//System.out.println("chance= "+chance+" (i="+i+"), hit= "+h);
 		return h;
 	}
 	
@@ -55,6 +54,14 @@ public class Scripts
 			return a;
 		return b;
 	}
+	
+	public static int min(int a,int b)
+	{
+		if (a>b)
+			return b;
+		return a;
+	}
+	
 	public static boolean isSinT(String S,String[] T)
 	{
 		for(int i=0;i<T.length;i++)
@@ -65,5 +72,9 @@ public class Scripts
 		return false;
 	}
 	
-	
+	public static void restart()
+	{
+		GameManager.objects.clear();
+		GameManager.objects.add(new Game.Rooms.A_ClassSelect());
+	}	
 }

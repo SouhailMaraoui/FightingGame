@@ -7,47 +7,55 @@ import Game.Rooms.C_Arena;
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
+import java.util.Random;
 
 public class Enemy extends GameObject
 {
 	private Classe p1;
+	private Random r=new Random();
 	private static Classe p2;
-	private Image enemy,I,A,P,H;
+	private Image enemy,I,A1,A2,P,H,logo;
 	private int px,py;
 	private int Ix,Iy;
-	private int Ax,Ay;
+	private int A1x,A1y;
+	private int A2x,A2y;
 	private int Px,Py;
 	private int Hx,Hy;
-
+	
+	private int i=0;
+	private int p1vit;
+	private int p2vit;
 	public static boolean AITurn=false;
 	private boolean parrying=false;
 	private static int toBeParried=0;
 	
-	
-	private int vitality=200;
+	private int vitality=147;
+	private int damage1=45,damage2=40;
+	private int heal=30;
 	
 	private int Fcount=0;
-	private boolean Aing,Hing,Ping;
 	
 	public Enemy()
 	{
 		p1=A_ClassSelect.getPlayer();
 		p2=new Classe();
-		p2.setStat(60,60, 60, 60);
-		p2.setVitatlity(vitality);
-		Ix=2100;Iy=100;
-		Ax=2100;Ay=100;
-		Px=2100;Py=100;
-		Hx=2100;Hy=100;
+		p2.setVitality(vitality);
+		Ix=2700;Iy=100;
+		A1x=2200;A1y=100;
+		A2x=2700;A2y=100;
+		Px=2700;Py=100;
+		Hx=2700;Hy=100;
 		enemy=I=new Image("/Sprites/Athlete/Arena/Idle.png");
-		A=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
+		A2=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
+		A1=new Image("/Sprites/Athlete/Arena/Attack_Dagger.png");
 		P=new Image("/Sprites/Athlete/Arena/Parry.png");
 		H=new Image("/Sprites/Athlete/Arena/Heal.png");
+		logo=new Image("/Sprites/Athlete/Logo.png");
 	}
 	
 	public void update(GameEngine ge, float dt)
 	{
-		vitality=p2.getVitatlity();
+		vitality=p2.getVitality();
 		
 		if(parrying && AITurn)
 		{
@@ -55,32 +63,15 @@ public class Enemy extends GameObject
 			toBeParried=0;
 		}
 		
-		if(Fcount==0 && !parrying)	{enemy=I;}
-
+		if(Fcount==0 && !parrying)	{enemy=I;px=Ix;py=Iy;}
+		
 		if(!C_Arena.myTurn)
 		{
-			if(Fcount==0){Fcount=150;}
+			if(Fcount==0){Fcount=200;i=r.nextInt(100);p1vit=p1.getVitality();p2vit=vitality;}
+			int j=i;
 			if(21<Fcount && Fcount<80)
 			{
-				if(150<vitality)
-				{
-					enemy=A;
-					if(Player.getToBeParried()<50)
-					{
-						if(Fcount==50)p1.setVitatlity(p1.getVitatlity()+Player.getToBeParried()-50);
-					}
-				}
-				if(50<vitality && vitality<=150)
-				{
-					enemy=P;
-					AITurn=false;
-					parry();
-				}
-				if(vitality<=50)
-				{
-					enemy=H;
-					if(Fcount==50)p2.setVitatlity(p2.getVitatlity()+50);
-				}
+				AI(j,p1vit,p2vit);
 			}
 			if(Fcount<2)
 			{
@@ -92,29 +83,73 @@ public class Enemy extends GameObject
 		if(Fcount>0)	{Fcount-=1;}
 	}
 	
-	public void parry()
+
+	
+	public void AI(int i, int p1vit, int p2vit)
 	{
-		parrying=true;
-		toBeParried=30;
+		if(p1vit<damage1)
+		{
+			attack1();
+		}
+		else if(100<p2vit)
+		{
+			if(i<50)
+			{
+				
+				attack1();
+			}
+			else if(i<75)
+			{
+				attack2();
+			}
+			else 
+			{
+				parry();
+			}
+		}
+		
+		else if(30<p2vit)
+		{
+			if(i<25)
+			{
+				attack1();
+			}
+			else if(i<50)
+			{
+				attack2();
+			}
+			else if(i<70)
+			{
+				parry();
+			}
+			else 
+			{
+				heal();
+			}
+		}
+		else 
+		{
+			heal();
+		}
 	}
 	
 	public void render(GameEngine ge, Renderer r)
 	{
-		px=Ix;py=Iy;
-		if(Fcount>0)
-		{
-			if(Aing){enemy=A;px=Ax;py=Ay;}
-			else if(Ping) {enemy=P;px=Px;py=Py;}
-			else if(Hing) {enemy=H;px=Hx;py=Hy;}
-		}
-		r.drawImageReversed(enemy, px+600, py);
-		
-		r.drawNumber(p2.getVitatlity(), 2900, 0);
+		r.drawImageReversed(enemy, px, py);
 		
 		if(toBeParried!=0)
 		{
-			r.drawNumber(toBeParried, 2550, 0);
+			r.drawNumber(toBeParried, 2850, 70);
 		}
+		
+		//Draw-Health---------------------------------------------------------------------------
+		r.drawImage(logo, 2940,10);
+		r.drawRectangle(2940, 23, p2.getVitality()+toBeParried, 24, 0xff1f1f1f,-1);
+		r.drawRectangle(2940, 25, p2.getVitality(), 20, 0xff88313C,-1);
+		r.drawRectangle(2940-p2.getVitality(), 25, toBeParried, 20, 0xff23679F,-1);
+		r.drawRectangle(2940, 42, p2.getVitality()+toBeParried, 3, 0xff8C202F,-1);
+
+		if(p2.getVitality()>=0)r.drawNumber(p2.getVitality(), 2920, 70);
 	}
 
 	public static Classe getP2()
@@ -125,5 +160,37 @@ public class Enemy extends GameObject
 	public static int getToBeParried()
 	{
 		return toBeParried;
+	}
+
+	public void attack1()
+	{
+		enemy=A1; px=A1x ;py=A1y;
+		if(Player.getToBeParried()<damage1)
+		{
+			if(Fcount==50)p1.setVitality(p1.getVitality()+Player.getToBeParried()-damage1);
+		}
+	}
+	public void attack2()
+	{
+		enemy=A2; px=A2x ;py=A2y;
+		if(Player.getToBeParried()<damage2)
+		{
+			if(Fcount==50)p1.setVitality(p1.getVitality()+Player.getToBeParried()-damage2);
+		}
+	}
+
+	public void parry()
+	{
+		System.out.println("P");
+		enemy=P; px=Px ;py=Py;
+		AITurn=false;
+		parrying=true;
+		toBeParried=40;
+	}
+	
+	public void heal()
+	{
+		enemy=H; px=Hx ;py=Hy;
+		if(Fcount==50)p2.setVitality(p2.getVitality()+heal);
 	}
 }

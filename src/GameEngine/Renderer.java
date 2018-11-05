@@ -1,6 +1,8 @@
 package GameEngine;
 
 import java.awt.image.DataBufferInt;
+
+import Game.GameManager;
 import Game.Scripts;
 import GameEngine.GFX.Image;
 
@@ -33,7 +35,7 @@ public class Renderer
 	
 	public void clear()
 	{
-		for (int i=0; i<p.length; i++)	{p[i]=0xffffffFF;}
+		for (int i=0; i<p.length; i++)	{p[i]=0xffffffff;}
 	}
 	
 	public void setPixel(int x, int y, int value)
@@ -101,13 +103,13 @@ public class Renderer
 		}
 	}
 
-	public void drawRectangle(int offX,int offY,int width, int height, int color)
+	public void drawRectangle(int offX,int offY,int width, int height, int color,int direction)
 	{
 		for(int y=0;y<height;y++)
 		{
 			for(int x=0;x<width;x++)
 			{
-				setPixel(x+offX,y+offY,color);
+				setPixel(direction*x+offX,y+offY,color);
 			}
 		}
 	}
@@ -117,11 +119,11 @@ public class Renderer
 		int stat=i;
 		drawImage(down,x,y);
 		drawImage(up,x+200,y);
-		if(Scripts.isClicked(down,x, y) && stat>min)
+		if((Scripts.isClicked(down,x, y) || GameManager.LB) && stat>min)
 		{
 			stat--;
 		}
-		if(Scripts.isClicked(up,x+200, y) && stat<max)
+		if((Scripts.isClicked(up,x+200, y) || GameManager.RB) && stat<max)
 		{
 			stat++;
 		}

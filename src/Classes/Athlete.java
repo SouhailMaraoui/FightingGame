@@ -15,9 +15,9 @@ public class Athlete extends Classe
 
 	public Athlete()
 	{	
-		Weapon staff=new Weapon(20000,10,10);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon dagger=new Weapon(20000,10,10);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
-		Weapon potion=new Weapon(20000,10,10);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
+		Weapon staff=new Weapon(220,180,40);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon dagger=new Weapon(230,165,0);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
+		Weapon potion=new Weapon(220,250,0);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
 		
 		Ix=2100;Iy=100;
 		A1x=2610;A1y=100;
@@ -30,6 +30,9 @@ public class Athlete extends Classe
 		A2=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
 		P=new Image("/Sprites/Athlete/Arena/Parry.png");
 		H=new Image("/Sprites/Athlete/Arena/Heal.png");
+		
+		logo=new Image("/Sprites/Athlete/Logo.png");
+
 		
 		image[0]=I;image[1]=A1;image[2]=A2;image[3]=P;image[4]=H;
 		

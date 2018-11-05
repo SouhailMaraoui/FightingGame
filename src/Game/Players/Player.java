@@ -13,18 +13,19 @@ import GameEngine.GFX.Image;
 
 public class Player extends GameObject
 {
-	private static Classe p1=A_ClassSelect.getPlayer();
-	private static Classe p2=Enemy.getP2();
+	private static Classe p1;
+	private static Classe p2;
 	
-	private Image player;
+	private Image player,missed;
 	private Image[] image;
 	private int[][] imagePos;
 	private int px,py;
 	
+	private boolean Missed;
 	private boolean parrying=false;
-	private static int toBeParried=0;
+	public static int toBeParried=0,myDamage=0,myHeal=0;
 	
-	public static int[] playerAction;
+	public static int[] playerAction= {0,0};
 	
 	public static boolean[][] T;
 
@@ -37,13 +38,20 @@ public class Player extends GameObject
 		//hit=new Image("/UI/Info/Hit.png");
 		//chance=new Image("/UI/Info/Chance.png");
 		
+		p1=A_ClassSelect.getPlayer();
+		p2=Enemy.getP2();
+		
 		imagePos=p1.getImagePos();
 		image=p1.getImage();
+		
+		missed=new Image("/UI/Missed.png");
 		
 	}
 	
 	public void update(GameEngine ge, float dt)
 	{
+		GameManager.End=false;
+		
 		int k=0;
 		
 		if(parrying && C_Arena.myTurn)
@@ -56,6 +64,7 @@ public class Player extends GameObject
 		{
 			player=image[0];
 			px=imagePos[0][0];py=imagePos[0][1];
+			Missed=false;
 		}
 		
 		T= C_Arena.T2;
@@ -69,13 +78,13 @@ public class Player extends GameObject
 				if(weapon[i][j]!=null)
 				{
 					k+=1;
-					if(C_Arena.T1[i])
+					if(C_Arena.T1[i]&& T[i][j])
 					{
 						if(i==0) {playerAction=p1.Attack(weapon[i][j]);}
 						if(i==1) {playerAction=p1.Parry(weapon[i][j]);}
 						if(i==2) {playerAction=p1.Heal(weapon[i][j]);}
 						
-						if(GameManager.MB && T[i][j])
+						if(GameManager.MB )
 						{
 							
 							C_Arena.myTurn=false;
@@ -86,13 +95,19 @@ public class Player extends GameObject
 							
 							if(i==0) 
 							{
-								int myDamage=Scripts.ifHit(playerAction[0],playerAction[1]);
+								myDamage=Scripts.ifHit(playerAction[0],playerAction[1]);
+								if(myDamage==0) Missed=true;
 								if(myDamage>Enemy.getToBeParried())
-								{p2.setVitatlity(p2.getVitatlity()+Enemy.getToBeParried()-myDamage);}
+								{p2.setVitality(p2.getVitality()+Enemy.getToBeParried()-myDamage);}
 								
 							}
 							if(i==1) {parry();}
-							if(i==2) {p1.setVitatlity(p1.getVitatlity()+Scripts.ifHit(playerAction[0],playerAction[1]));}
+							if(i==2) 
+							{
+								myHeal=Scripts.ifHit(playerAction[0],playerAction[1]);
+								p1.setVitality(p1.getVitality()+myHeal);
+								if(myHeal==0) Missed=true;
+							}
 							
 							if(Fcount>0)
 							{
@@ -100,18 +115,27 @@ public class Player extends GameObject
 								px=imagePos[k][0];py=imagePos[k][1];
 							}
 							Enemy.AITurn=true;
+							
 						}
 					}
 				}
 			}
 		}
 		if(Fcount>0) {Fcount-=1;}
+		
+		if(p1.getVitality()<=0)
+		{
+			GameManager.End=true;
+		}
+		
+		
 	}
 	
 	public void parry()
 	{
 		parrying=true;
 		toBeParried=Scripts.ifHit(playerAction[0],playerAction[1]);
+		if(toBeParried==0) Missed=true;
 	}
 	
 	public void render(GameEngine ge, Renderer r)
@@ -119,7 +143,11 @@ public class Player extends GameObject
 		r.drawImage(player, px, py);
 		if(toBeParried!=0)
 		{
-			r.drawNumber(toBeParried, 2200, 0);
+			r.drawNumber(toBeParried, 2100, 70);
+		}
+		if(Missed)
+		{
+			r.drawImage(missed, 2350,100);
 		}
 	}
 

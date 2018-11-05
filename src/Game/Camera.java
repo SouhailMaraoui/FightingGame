@@ -24,6 +24,13 @@ public class Camera
 			Game.Rooms.B_StatSelect.canNext=false;
 		}
 		
+		if(offX>0 && GameManager.End)
+		{
+			Game.Rooms.A_ClassSelect.canNext= Game.Rooms.B_StatSelect.canNext=false;
+			offX=0;
+			Scripts.restart();
+		}
+		
 		ge.getRenderer().setCamX((int)offX);
 		ge.getRenderer().setCamY((int)offY);
 	}

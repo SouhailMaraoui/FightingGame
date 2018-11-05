@@ -19,9 +19,9 @@ public class Warrior extends Classe
 
 	public Warrior()
 	{		
-		Weapon sword=new Weapon(20000,100,100);	sword.setTag("Sword"); 	sword.setImage("/UI/Info/Sword.png");
-		Weapon shield=new Weapon(20000,100,100);	shield.setTag("Shield");shield.setImage("/UI/Info/Shield.png");
-		Weapon banner=new Weapon(20000,100,100);	banner.setTag("Banner");banner.setImage("/UI/Info/Banner.png");
+		Weapon sword=new Weapon(220,75,150);	sword.setTag("Sword"); 	sword.setImage("/UI/Info/Sword.png");
+		Weapon shield=new Weapon(180,90,250);	shield.setTag("Shield");shield.setImage("/UI/Info/Shield.png");
+		Weapon banner=new Weapon(175,50,0);	banner.setTag("Banner");banner.setImage("/UI/Info/Banner.png");
 		
 		Ix=2100;Iy=100;
 		Ax=2500;Ay=100;
@@ -34,13 +34,15 @@ public class Warrior extends Classe
 		P1=new Image("/Sprites/Warrior/Arena/Parry.png");
 		P2=new Image("/Sprites/Warrior/Arena/Parry.png");
 		H=new Image("/Sprites/Warrior/Arena/Heal.png");
+		
+		logo=new Image("/Sprites/Warrior/Logo.png");
 
 		image[0]=I;image[1]=A;image[2]=P1;image[3]=P2;image[4]=H;
 		
 		imagePos[0][0]=Ix;imagePos[1][0]=Ax;imagePos[2][0]=P1x;imagePos[3][0]=P2x;imagePos[4][0]=Hx;
 		imagePos[0][1]=Iy;imagePos[1][1]=Ay;imagePos[2][1]=P2y;imagePos[3][1]=P2y;imagePos[4][1]=Hy; 
 		
-		weapon[0][0]=sword;  weapon[0][1]=null; 
+		weapon[0][0]=sword; weapon[0][1]=null; 
 		weapon[1][0]=sword ; weapon[1][1]=shield; 
 		weapon[2][0]=banner; weapon[2][1]=null; 
 	}
