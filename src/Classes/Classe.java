@@ -50,8 +50,8 @@ public class Classe
 		}
 		if(weapon.getTag()=="Staff")
 		{
-			chance=dexterity*weapon.getManiabilty()/10000f;
-			damage=force*weapon.getImpact()/100;
+			chance=concentration*weapon.getFacility()/10000f;
+			damage=intelligence*weapon.getEfficacity()/100;
 		}
 		int[] r= {damage, (int)(100*chance)};
 		return r;
@@ -70,7 +70,7 @@ public class Classe
 		if(weapon.getTag()=="Staff")
 		{
 			chance=concentration*weapon.getFacility()/10000f;
-			deflect=intelligence*weapon.getEfficacity()/100;
+			deflect=intelligence*weapon.getProtection()/100;
 		}
 		if(weapon.getTag()=="Shield")
 		{
@@ -136,6 +136,11 @@ public class Classe
 	public void setVitality(int vitality)
 	{
 		this.vitality = vitality;
+	}
+	
+	public void setVitalityRelative(int RelativeVit)
+	{
+		this.vitality+=RelativeVit;
 	}
 
 	public Image getLogo()

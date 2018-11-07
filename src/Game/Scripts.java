@@ -78,3 +78,4 @@ public class Scripts
 		GameManager.objects.add(new Game.Rooms.A_ClassSelect());
 	}	
 }
+

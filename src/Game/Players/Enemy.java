@@ -14,7 +14,13 @@ public class Enemy extends GameObject
 	private Classe p1;
 	private Random r=new Random();
 	private static Classe p2;
-	private Image enemy,I,A1,A2,P,H,logo;
+	public static Image enemy;
+	private Image I;
+	private Image A1;
+	public static Image A2;
+	private Image P;
+	private Image H;
+	private Image logo;
 	private int px,py;
 	private int Ix,Iy;
 	private int A1x,A1y;
@@ -45,11 +51,11 @@ public class Enemy extends GameObject
 		A2x=2700;A2y=100;
 		Px=2700;Py=100;
 		Hx=2700;Hy=100;
-		enemy=I=new Image("/Sprites/Athlete/Arena/Idle.png");
-		A2=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
-		A1=new Image("/Sprites/Athlete/Arena/Attack_Dagger.png");
-		P=new Image("/Sprites/Athlete/Arena/Parry.png");
-		H=new Image("/Sprites/Athlete/Arena/Heal.png");
+		enemy=I=new Image("/Sprites/Enemy/Idle.png");
+		A2=new Image("/Sprites/Enemy/Attack_Staff.png");
+		A1=new Image("/Sprites/Enemy/Attack_Dagger.png");
+		P=new Image("/Sprites/Enemy/Parry.png");
+		H=new Image("/Sprites/Enemy/Heal.png");
 		logo=new Image("/Sprites/Athlete/Logo.png");
 	}
 	
@@ -141,6 +147,7 @@ public class Enemy extends GameObject
 		{
 			r.drawNumber(toBeParried, 2850, 70);
 		}
+		
 		
 		//Draw-Health---------------------------------------------------------------------------
 		r.drawImage(logo, 2940,10);

@@ -16,12 +16,13 @@ public class Player extends GameObject
 	private static Classe p1;
 	private static Classe p2;
 	
-	private Image player,missed;
+	private Image player,missed,spell;
 	private Image[] image;
 	private int[][] imagePos;
 	private int px,py;
 	
-	private boolean Missed;
+	public static boolean Missed;
+	private boolean drawSpell=false;
 	private boolean parrying=false;
 	public static int toBeParried=0,myDamage=0,myHeal=0;
 	
@@ -31,12 +32,13 @@ public class Player extends GameObject
 
 	private Weapon[][] weapon=Classe.getWeapon();
 	
-	public static int Fcount=0;
+	public static int Fcount;
 	
 	public Player()
 	{
-		//hit=new Image("/UI/Info/Hit.png");
-		//chance=new Image("/UI/Info/Chance.png");
+		Fcount=0;
+		
+		spell=new Image("/Sprites/Spell.png");
 		
 		p1=A_ClassSelect.getPlayer();
 		p2=Enemy.getP2();
@@ -65,6 +67,7 @@ public class Player extends GameObject
 			player=image[0];
 			px=imagePos[0][0];py=imagePos[0][1];
 			Missed=false;
+			drawSpell=false;
 		}
 		
 		T= C_Arena.T2;
@@ -96,16 +99,17 @@ public class Player extends GameObject
 							if(i==0) 
 							{
 								myDamage=Scripts.ifHit(playerAction[0],playerAction[1]);
-								if(myDamage==0) Missed=true;
-								if(myDamage>Enemy.getToBeParried())
-								{p2.setVitality(p2.getVitality()+Enemy.getToBeParried()-myDamage);}
 								
+								if(myDamage==0) 						{Missed=true;}
+								if(myDamage>Enemy.getToBeParried()) 	{p2.setVitalityRelative(Enemy.getToBeParried()-myDamage);}
+								if(weapon[i][j].getTag()=="Staff")		{drawSpell=true;}
 							}
 							if(i==1) {parry();}
 							if(i==2) 
 							{
 								myHeal=Scripts.ifHit(playerAction[0],playerAction[1]);
-								p1.setVitality(p1.getVitality()+myHeal);
+								
+								p1.setVitalityRelative(myHeal);
 								if(myHeal==0) Missed=true;
 							}
 							
@@ -121,14 +125,7 @@ public class Player extends GameObject
 				}
 			}
 		}
-		if(Fcount>0) {Fcount-=1;}
-		
-		if(p1.getVitality()<=0)
-		{
-			GameManager.End=true;
-		}
-		
-		
+		if(Fcount>0) {Fcount-=1;}		
 	}
 	
 	public void parry()
@@ -141,6 +138,7 @@ public class Player extends GameObject
 	public void render(GameEngine ge, Renderer r)
 	{
 		r.drawImage(player, px, py);
+		if (drawSpell) r.drawImage(spell, 2700,100);
 		if(toBeParried!=0)
 		{
 			r.drawNumber(toBeParried, 2100, 70);

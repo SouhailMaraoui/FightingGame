@@ -15,6 +15,8 @@ import GameEngine.GFX.Image;
 
 public class C_Arena extends GameObject
 {
+	public static boolean canNext;
+	
 	private Classe p1,p2;
 	
 	public static ArrayList<Image> weaponList= new ArrayList<Image>();
@@ -23,8 +25,8 @@ public class C_Arena extends GameObject
 	public static boolean myTurn;
 	
 	private Image attack, parry, heal;
-	private Image hit,chance;
-	private Image panel, pointer,logo;
+	private Image hit,chance,spell;
+	private Image panel, pointer,logo,end;
 	
 	private int ax=2100,ay=375;
 	private int px=2100,py=425;
@@ -59,9 +61,11 @@ public class C_Arena extends GameObject
 		
 		hit		=	new Image("/UI/Info/Hit.png");
 		chance	=	new Image("/UI/Info/Chance.png");
-						
+		spell=new Image("/Sprites/Spell.png");
+		
 		panel= new Image("/UI/Panel2.png");
 		pointer= new Image("/UI/Pointer2.png");
+		
 		logo=p1.getLogo();
 	}
 
@@ -101,9 +105,16 @@ public class C_Arena extends GameObject
 		if(Scripts.isTrueInList(T2))	{additionalInfo=true;}
 		else 							{additionalInfo=false;}
 		
-		if(p1.getVitality()<0 || p2.getVitality()<0)
+		if(p1.getVitality()<0 )
 		{
-			GameManager.End=true;
+			Player.Missed=false;
+			end=new Image("/UI/Loss.png");
+			canNext=true;
+		}
+		if(p2.getVitality()<0)
+		{
+			end=new Image("/UI/Win.png");
+			canNext=true;
 		}
 		
 	}
@@ -111,6 +122,11 @@ public class C_Arena extends GameObject
 	public void render(GameEngine ge, Renderer r)
 	{
 		Iy=375;
+		if(p2.getVitality()<0 || p1.getVitality()<0) {r.drawImage(end, 2350, 100);}
+		if(Enemy.enemy==Enemy.A2)
+		{
+			r.drawImage(spell, 2100, 100);
+		}
 		
 		r.drawImage(panel,2000, 350);
 		r.drawImage(attack,ax,ay);

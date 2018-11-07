@@ -10,7 +10,8 @@ import GameEngine.GFX.Image;
 
 public class B_StatSelect extends GameObject
 {		
-	private Image S1,S2,S3,S4,S5,splashArt,confirm;
+	private Image S1,S2,S3,S4,S5,splashArt;
+	public static Image confirm;
 	private Classe player;
 	int i=0;
 	int exp=1;
@@ -95,12 +96,15 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[1], 1600, 155);r.drawImage(S2, 1250, 150);
 			r.drawNumber(stat[2], 1600, 205);r.drawImage(S3, 1250, 200);
 			r.drawNumber(stat[3], 1600, 255);r.drawImage(S4, 1250, 250);
-			player.setStat(stat[0],stat[1],stat[2],stat[3]);
+			
+			if(player.getTag()=="Mage") 	{player.setStat(stat[3],stat[2],stat[1],stat[0]);}
+			else 							{player.setStat(stat[0],stat[1],stat[2],stat[3]);}
+			
 			player.setVitality(200+3-stat[0]-stat[1]-stat[2]-stat[3]);
 			canNext=true;
 			r.drawImage(confirm, 1400, 325);
 			if(GameManager.Esc) {GameManager.End=true;};
-			if(GameManager.EB) {i=5;}
+			if(GameManager.EB || Scripts.isClicked(confirm, 1400, 325)) {i=5;}
 		}
 	}
 	

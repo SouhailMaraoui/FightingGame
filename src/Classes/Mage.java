@@ -15,8 +15,8 @@ public class Mage extends Classe
 	public Mage()
 	{		
 		
-		Weapon staff=new Weapon(220,75,150); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon grimoire=new Weapon(850,200,0);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
+		Weapon staff=new Weapon(190,110,80); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon grimoire=new Weapon(200,125,0);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
 		
 		Ix=2100;Iy=100;
 		Ax=2100;Ay=100;

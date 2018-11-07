@@ -15,9 +15,9 @@ public class Athlete extends Classe
 
 	public Athlete()
 	{	
-		Weapon staff=new Weapon(220,180,40);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon dagger=new Weapon(230,165,0);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
-		Weapon potion=new Weapon(220,250,0);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
+		Weapon staff=new Weapon(420,180,90);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon dagger=new Weapon(430,165,0);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
+		Weapon potion=new Weapon(450,350,0);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
 		
 		Ix=2100;Iy=100;
 		A1x=2610;A1y=100;
