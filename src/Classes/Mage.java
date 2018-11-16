@@ -4,19 +4,18 @@ import GameEngine.GFX.Image;
 
 public class Mage extends Classe
 {
-	public static Image player,I,A,P,H;
+	private static Image I,A,P,H;
 	
-	public static int px,py;
-	public static int Ix,Iy;
-	public static int Ax,Ay;
-	public static int Px,Py;
-	public static int Hx,Hy;
+	private static int Ix,Iy;
+	private static int Ax,Ay;
+	private static int Px,Py;
+	private static int Hx,Hy;
 	
 	public Mage()
 	{		
 		
-		Weapon staff=new Weapon(190,110,80); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon grimoire=new Weapon(200,125,0);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
+		Weapon staff=new Weapon(190,70,80); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon grimoire=new Weapon(200,65,0);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
 		
 		Ix=2100;Iy=100;
 		Ax=2100;Ay=100;
@@ -27,7 +26,7 @@ public class Mage extends Classe
 		A=new Image("/Sprites/Mage/Arena/Attack_Staff.png");
 		P=new Image("/Sprites/Mage/Arena/Parry.png");
 		H=new Image("/Sprites/Mage/Arena/Heal.png");
-		
+		splashArt=new Image("/SplashArt/Mage.png");		
 		logo=new Image("/Sprites/Mage/Logo.png");
 
 

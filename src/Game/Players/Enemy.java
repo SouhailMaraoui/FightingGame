@@ -43,7 +43,7 @@ public class Enemy extends GameObject
 	
 	public Enemy()
 	{
-		p1=A_ClassSelect.getPlayer();
+		p1=A_ClassSelect.getP1();
 		p2=new Classe();
 		p2.setVitality(vitality);
 		Ix=2700;Iy=100;
@@ -101,10 +101,9 @@ public class Enemy extends GameObject
 		{
 			if(i<50)
 			{
-				
 				attack1();
 			}
-			else if(i<75)
+			else if(i<90)
 			{
 				attack2();
 			}
@@ -172,23 +171,22 @@ public class Enemy extends GameObject
 	public void attack1()
 	{
 		enemy=A1; px=A1x ;py=A1y;
-		if(Player.getToBeParried()<damage1)
+		if(Player1.getToBeParried()<damage1)
 		{
-			if(Fcount==50)p1.setVitality(p1.getVitality()+Player.getToBeParried()-damage1);
+			if(Fcount==50)p1.setVitality(p1.getVitality()+Player1.getToBeParried()-damage1);
 		}
 	}
 	public void attack2()
 	{
 		enemy=A2; px=A2x ;py=A2y;
-		if(Player.getToBeParried()<damage2)
+		if(Player1.getToBeParried()<damage2)
 		{
-			if(Fcount==50)p1.setVitality(p1.getVitality()+Player.getToBeParried()-damage2);
+			if(Fcount==50)p1.setVitality(p1.getVitality()+Player1.getToBeParried()-damage2);
 		}
 	}
 
 	public void parry()
 	{
-		System.out.println("P");
 		enemy=P; px=Px ;py=Py;
 		AITurn=false;
 		parrying=true;

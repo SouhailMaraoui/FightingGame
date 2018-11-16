@@ -4,20 +4,19 @@ import GameEngine.GFX.Image;
 
 public class Athlete extends Classe
 {
-	public static Image player,I,A1,A2,P,H;
+	private static Image I,A1,A2,P,H;
 	
-	public static int px,py;
-	public static int Ix,Iy;
-	public static int A1x,A1y;
-	public static int A2x,A2y;
-	public static int Px,Py;
-	public static int Hx,Hy;
+	private static int Ix,Iy;
+	private static int A1x,A1y;
+	private static int A2x,A2y;
+	private static int Px,Py;
+	private static int Hx,Hy;
 
 	public Athlete()
 	{	
-		Weapon staff=new Weapon(420,180,90);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon dagger=new Weapon(430,165,0);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
-		Weapon potion=new Weapon(450,350,0);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
+		Weapon staff=new Weapon(400,100,90);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon dagger=new Weapon(400,100,0);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
+		Weapon potion=new Weapon(400,100,0);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
 		
 		Ix=2100;Iy=100;
 		A1x=2610;A1y=100;
@@ -25,12 +24,13 @@ public class Athlete extends Classe
 		Px=2100;Py=100;
 		Hx=2100;Hy=100;
 		
-		I=new Image("/Sprites/Athlete/Arena/Idle.png");
-		A1=new Image("/Sprites/Athlete/Arena/Attack_Dagger.png");
-		A2=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
-		P=new Image("/Sprites/Athlete/Arena/Parry.png");
-		H=new Image("/Sprites/Athlete/Arena/Heal.png");
-		
+		I			=new Image("/Sprites/Athlete/Arena/Idle.png");
+		A1			=new Image("/Sprites/Athlete/Arena/Attack_Dagger.png");
+		A2			=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
+		P			=new Image("/Sprites/Athlete/Arena/Parry.png");
+		H			=new Image("/Sprites/Athlete/Arena/Heal.png");
+		splashArt	=new Image("/SplashArt/Athlete.png");
+				
 		logo=new Image("/Sprites/Athlete/Logo.png");
 
 		

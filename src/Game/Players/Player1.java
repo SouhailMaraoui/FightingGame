@@ -11,7 +11,7 @@ import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
 
-public class Player extends GameObject
+public class Player1 extends GameObject
 {
 	private static Classe p1;
 	private static Classe p2;
@@ -30,24 +30,24 @@ public class Player extends GameObject
 	
 	public static boolean[][] T;
 
-	private Weapon[][] weapon=Classe.getWeapon();
+	private Weapon[][] weapon;
 	
 	public static int Fcount;
 	
-	public Player()
+	public Player1()
 	{
 		Fcount=0;
 		
 		spell=new Image("/Sprites/Spell.png");
 		
-		p1=A_ClassSelect.getPlayer();
-		p2=Enemy.getP2();
+		p1=A_ClassSelect.getP1();
+		weapon=p1.getWeapon();
+		p2=A_ClassSelect.getP2();
 		
 		imagePos=p1.getImagePos();
 		image=p1.getImage();
 		
 		missed=new Image("/UI/Missed.png");
-		
 	}
 	
 	public void update(GameEngine ge, float dt)
@@ -71,8 +71,6 @@ public class Player extends GameObject
 		}
 		
 		T= C_Arena.T2;
-
-		
 		
 		for(int i=0;i<T.length;i++)
 		{
@@ -81,7 +79,7 @@ public class Player extends GameObject
 				if(weapon[i][j]!=null)
 				{
 					k+=1;
-					if(C_Arena.T1[i]&& T[i][j])
+					if(C_Arena.T1[i] && T[i][j])
 					{
 						if(i==0) {playerAction=p1.Attack(weapon[i][j]);}
 						if(i==1) {playerAction=p1.Parry(weapon[i][j]);}
@@ -101,7 +99,7 @@ public class Player extends GameObject
 								myDamage=Scripts.ifHit(playerAction[0],playerAction[1]);
 								
 								if(myDamage==0) 						{Missed=true;}
-								if(myDamage>Enemy.getToBeParried()) 	{p2.setVitalityRelative(Enemy.getToBeParried()-myDamage);}
+								if(myDamage>Player2.getToBeParried()) 	{p2.setVitalityRelative(Player2.getToBeParried()-myDamage);}
 								if(weapon[i][j].getTag()=="Staff")		{drawSpell=true;}
 							}
 							if(i==1) {parry();}
@@ -109,7 +107,7 @@ public class Player extends GameObject
 							{
 								myHeal=Scripts.ifHit(playerAction[0],playerAction[1]);
 								
-								p1.setVitalityRelative(myHeal);
+								p1.setVitality(Scripts.min(p1.getVitality()+myHeal,p1.getInitVitality()));
 								if(myHeal==0) Missed=true;
 							}
 							
@@ -118,7 +116,7 @@ public class Player extends GameObject
 								player=image[k];
 								px=imagePos[k][0];py=imagePos[k][1];
 							}
-							Enemy.AITurn=true;
+							Player2.AITurn=true;
 							
 						}
 					}
@@ -139,7 +137,7 @@ public class Player extends GameObject
 	{
 		r.drawImage(player, px, py);
 		if (drawSpell) r.drawImage(spell, 2700,100);
-		if(toBeParried!=0)
+		if(toBeParried>0)
 		{
 			r.drawNumber(toBeParried, 2100, 70);
 		}

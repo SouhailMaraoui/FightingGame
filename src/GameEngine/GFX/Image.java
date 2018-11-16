@@ -7,17 +7,16 @@ import javax.imageio.ImageIO;
 
 public class Image
 {
-	private String tag;
 	
 	private int w,h;
 	private int[] p;
 	
 	public Image(String path)
 	{
-		BufferedImage image = null;
+		BufferedImage image=null;
 		
-		try {image=ImageIO.read(Image.class.getResourceAsStream((path)));} 
-		catch (IOException e) {e.printStackTrace();}
+		try	  {image=ImageIO.read(Image.class.getResourceAsStream((path)));} 
+		catch (IOException e)	{e.printStackTrace();}
 		
 		w=image.getWidth();
 		h=image.getHeight();
@@ -32,38 +31,13 @@ public class Image
 		return w;
 	}
 
-	public void setW(int w)
-	{
-		this.w = w;
-	}
-
 	public int getH()
 	{
 		return h;
 	}
 
-	public void setH(int h)
-	{
-		this.h = h;
-	}
-
 	public int[] getP()
 	{
 		return p;
-	}
-
-	public void setP(int[] p)
-	{
-		this.p = p;
-	}
-
-	public String getTag()
-	{
-		return tag;
-	}
-
-	public void setTag(String tag)
-	{
-		this.tag = tag;
 	}
 }

@@ -7,7 +7,8 @@ public class Classe
 {
 	private String tag;
 	
-	protected Image logo;
+	protected int[] stat=new int[4];
+	protected Image logo,splashArt;
 	
 	protected int force=0;
 	protected int dexterity=0;
@@ -15,10 +16,11 @@ public class Classe
 	protected int concentration=0;
 	
 	protected int vitality;
+	protected int initVitality;
 	
-	public static Image[] image=new Image[5];
-	public static int[][] imagePos=new int[5][2];
-	public static Weapon[][] weapon=new Weapon[3][2];
+	protected Image[] image=new Image[5];
+	protected int[][] imagePos=new int[5][2];
+	protected Weapon[][] weapon=new Weapon[3][2];
 	
 	public Classe()
 	{
@@ -81,7 +83,6 @@ public class Classe
 		return r;
 	}
 	
-	
 	public int[] Heal(Weapon weapon)
 	{
 		float chance=0;
@@ -113,7 +114,7 @@ public class Classe
 		return image;
 	}
 
-	public static Weapon[][] getWeapon()
+	public Weapon[][] getWeapon()
 	{		
 		return weapon;
 	}
@@ -138,6 +139,17 @@ public class Classe
 		this.vitality = vitality;
 	}
 	
+	public void setInitVitality(int vitality)
+	{
+		this.initVitality = vitality;
+		this.vitality = vitality;
+	}
+	
+	public int getInitVitality()
+	{
+		return initVitality;
+	}
+	
 	public void setVitalityRelative(int RelativeVit)
 	{
 		this.vitality+=RelativeVit;
@@ -148,8 +160,14 @@ public class Classe
 		return logo;
 	}
 
-	public void setLogo(Image logo)
+
+	public Image getSplashArt()
 	{
-		this.logo = logo;
+		return splashArt;
+	}
+
+	public int[] getStat()
+	{
+		return stat;
 	}
 }

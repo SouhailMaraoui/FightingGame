@@ -42,7 +42,7 @@ public class Renderer
 	{
 		x-=camX;
 		y-=camY;
-		if ((x<0 || x>=pW || y<0 || y>=pH) || value == 0xffff00ff)
+		if (x<0 || x>=pW || y<0 || y>=pH || value == 0xffff00ff)
 		{
 			return;
 		}

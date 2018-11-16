@@ -7,8 +7,8 @@ import Classes.Weapon;
 import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
-import Game.Players.Enemy;
-import Game.Players.Player;
+import Game.Players.Player1;
+import Game.Players.Player2;
 import GameEngine.GameEngine;
 import GameEngine.Renderer;
 import GameEngine.GFX.Image;
@@ -26,7 +26,7 @@ public class C_Arena extends GameObject
 	
 	private Image attack, parry, heal;
 	private Image hit,chance,spell;
-	private Image panel, pointer,logo,end;
+	private Image panel, pointer,end;
 	
 	private int ax=2100,ay=375;
 	private int px=2100,py=425;
@@ -45,13 +45,13 @@ public class C_Arena extends GameObject
 	
 	public C_Arena()
 	{
-		GameManager.objects.add(new Game.Players.Enemy());
-		GameManager.objects.add(new Game.Players.Player());
+		GameManager.objects.add(new Game.Players.Player2());
+		GameManager.objects.add(new Game.Players.Player1());
 		
 		myTurn=true;
-		p1=A_ClassSelect.getPlayer();
-		p2=Enemy.getP2();
-		weapon=Classe.getWeapon();
+		p1=A_ClassSelect.getP1();
+		p2=A_ClassSelect.getP2();
+		weapon=p1.getWeapon();
 		
 
 		
@@ -66,7 +66,6 @@ public class C_Arena extends GameObject
 		panel= new Image("/UI/Panel2.png");
 		pointer= new Image("/UI/Pointer2.png");
 		
-		logo=p1.getLogo();
 	}
 
 	public void update(GameEngine ge, float dt)
@@ -105,14 +104,15 @@ public class C_Arena extends GameObject
 		if(Scripts.isTrueInList(T2))	{additionalInfo=true;}
 		else 							{additionalInfo=false;}
 		
-		if(p1.getVitality()<0 )
+		if(p1.getVitality()<=0)
 		{
-			Player.Missed=false;
+			Player1.Missed=false;
 			end=new Image("/UI/Loss.png");
 			canNext=true;
 		}
-		if(p2.getVitality()<0)
+		if(p2.getVitality()<=0)
 		{
+			Player2.Missed=false;
 			end=new Image("/UI/Win.png");
 			canNext=true;
 		}
@@ -123,7 +123,7 @@ public class C_Arena extends GameObject
 	{
 		Iy=375;
 		if(p2.getVitality()<0 || p1.getVitality()<0) {r.drawImage(end, 2350, 100);}
-		if(Enemy.enemy==Enemy.A2)
+		if(Game.Players.Player2.drawSpell)
 		{
 			r.drawImage(spell, 2100, 100);
 		}
@@ -142,8 +142,8 @@ public class C_Arena extends GameObject
 		{
 			r.drawImage(hit,2754,395);
 			r.drawImage(chance,2740,445);
-			r.drawNumber((int)Player.playerAction[0], 2845, 405);
-			r.drawNumber((int)Player.playerAction[1], 2845, 455);
+			r.drawNumber((int)Player1.playerAction[0], 2845, 405);
+			r.drawNumber((int)Player1.playerAction[1], 2845, 455);
 		}
 		
 		for(Image i:weaponList)
@@ -152,12 +152,19 @@ public class C_Arena extends GameObject
 			Iy+=50;
 		}
 		
-		//Draw-Health---------------------------------------------------------------------------
-		r.drawImage(logo, 2010,10);
-		r.drawRectangle(2060, 23, p1.getVitality()+Player.toBeParried, 24, 0xff1f1f1f,1);
+		//Draw-Player-1-Health---------------------------------------------------------------------------
+		r.drawImage(p1.getLogo(), 2010,10);
+		r.drawRectangle(2060, 23, p1.getVitality()+Player1.toBeParried, 24, 0xff1f1f1f,1);
 		r.drawRectangle(2060, 25, p1.getVitality(), 20, 0xff88313C,1);
-		//r.drawRectangle(2060+player.getVitality(), 25, Player.toBeParried, 20, 0xff23679F,1);
-		r.drawRectangle(2060, 42, p1.getVitality()+Player.toBeParried, 3, 0xff8C202F,1);
+		r.drawRectangle(2060, 42, p1.getVitality()+Player1.toBeParried, 3, 0xff8C202F,1);
 		if(p1.getVitality()>=0) r.drawNumber(p1.getVitality(), 2000, 65);
+		
+		//Draw-Player-2-Health---------------------------------------------------------------------------
+		r.drawImageReversed(p2.getLogo(), 2940,10);
+		r.drawRectangle(2940, 23, p2.getVitality()+Player2.toBeParried, 24, 0xff1f1f1f,-1);
+		r.drawRectangle(2940, 25, p2.getVitality(), 20, 0xff88313C,-1);
+		r.drawRectangle(2940, 42, p2.getVitality()+Player2.toBeParried, 3, 0xff8C202F,-1);
+		if(p2.getVitality()>=0) r.drawNumber(p2.getVitality(), 2920, 65);
+		
 	}
 }

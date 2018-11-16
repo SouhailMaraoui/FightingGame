@@ -63,9 +63,5 @@ public class Input implements KeyListener,MouseListener,MouseMotionListener
 
 	public int getMouseX()	{return mouseX+GameManager.offX;}
 	public int getMouseY()	{return mouseY+GameManager.offY;}
-
-	public boolean getKeys(int i)
-	{
-		return keys[i];
-	}
+	
 }

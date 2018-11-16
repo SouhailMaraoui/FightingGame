@@ -4,18 +4,13 @@ import GameEngine.GFX.Image;
 
 public class Warrior extends Classe 
 {
-	public static Image I,A,P1,P2,H;
+	private static Image I,A,P1,P2,H;
 	
-	public static int px,py;
-	public static int Ix,Iy;
-	public static int Ax,Ay;
-	public static int P1x,P1y;
-	public static int P2x,P2y;
-	public static int Hx,Hy;
-	
-	//public static Image[] image=new Image[5];
-	//public static int[][] imagePos=new int[5][2];
-	
+	private static int Ix,Iy;
+	private static int Ax,Ay;
+	private static int P1x,P1y;
+	private static int P2x,P2y;
+	private static int Hx,Hy;
 
 	public Warrior()
 	{		
@@ -34,13 +29,13 @@ public class Warrior extends Classe
 		P1=new Image("/Sprites/Warrior/Arena/Parry.png");
 		P2=new Image("/Sprites/Warrior/Arena/Parry.png");
 		H=new Image("/Sprites/Warrior/Arena/Heal.png");
+		splashArt=new Image("/SplashArt/Warrior.png");
 		
 		logo=new Image("/Sprites/Warrior/Logo.png");
 
 		image[0]=I;image[1]=A;image[2]=P1;image[3]=P2;image[4]=H;
-		
 		imagePos[0][0]=Ix;imagePos[1][0]=Ax;imagePos[2][0]=P1x;imagePos[3][0]=P2x;imagePos[4][0]=Hx;
-		imagePos[0][1]=Iy;imagePos[1][1]=Ay;imagePos[2][1]=P2y;imagePos[3][1]=P2y;imagePos[4][1]=Hy; 
+		imagePos[0][1]=Iy;imagePos[1][1]=Ay;imagePos[2][1]=P1y;imagePos[3][1]=P2y;imagePos[4][1]=Hy; 
 		
 		weapon[0][0]=sword; weapon[0][1]=null; 
 		weapon[1][0]=sword ; weapon[1][1]=shield; 
