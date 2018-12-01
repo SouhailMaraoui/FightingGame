@@ -119,8 +119,7 @@ public class AI_Left extends GameObject
 	public void attack()
 	{
 		int i=0;
-		if(weapon[0][1]!=null)	{i=r.nextInt(1);}
-		
+		if(weapon[0][1]!=null)	{i=r.nextInt(2);}
 		int [] playerAction=p1.Attack(weapon[0][i]);
 		
 		myDamage=Scripts.ifHit(playerAction[0], playerAction[1]);
@@ -140,7 +139,7 @@ public class AI_Left extends GameObject
 		parrying=true;
 
 		int i=0;
-		if(weapon[1][1]!=null)	{i=r.nextInt(1);}
+		if(weapon[1][1]!=null)	{i=r.nextInt(2);}
 		
 		int [] playerAction=p1.Parry(weapon[1][i]);
 		
@@ -153,7 +152,9 @@ public class AI_Left extends GameObject
 	
 	public void heal()
 	{
-		myHeal=Scripts.ifHit(p1.Heal(weapon[2][0])[0],p1.Heal(weapon[2][0])[1]);
+		int [] playerAction=p1.Heal(weapon[2][0]);
+		myHeal=Scripts.ifHit(playerAction[0],playerAction[1]);
+		
 		if(myHeal==0)	{p1.setMissed(true);}
 		p1.setVitality(Scripts.min(p1.getVitality()+myHeal,p1.getInitVitality()));
 

@@ -3,6 +3,7 @@ package Game.Rooms;
 import Classes.Classe;
 import Game.GameManager;
 import Game.GameObject;
+import Game.Scripts;
 import Game.Players.AI_Left;
 import Game.Players.AI_Right;
 import GameEngine.GameEngine;
@@ -16,7 +17,7 @@ public class C_Arena_AvA extends GameObject
 	private Classe p1,p2;
 	private AI_Left P1;
 	private AI_Right P2;	
-	private Image end,spell;
+	private Image end,spell,role,fast;
 	
 	public C_Arena_AvA()
 	{
@@ -30,17 +31,26 @@ public class C_Arena_AvA extends GameObject
 		p2=A_ClassSelect.getP2();
 		
 		spell	=	new Image("/Sprites/Spell.png");
+		role	=	new Image("/UI/Role.png");
+		fast 	=	new Image("/UI/Fast.png");
 	}
 
 	public void update(GameEngine ge, float dt)
 	{
+		if(Scripts.isClicked(fast, 2400, 350))
+		{
+			GameEngine.sleep=1;
+		}
+		
 		if(p1.getVitality()<=0)
 		{
+			GameEngine.sleep=10;
 			end=new Image("/UI/Loss.png");
 			canNext=true;
 		}
 		if(p2.getVitality()<=0)
 		{
+			GameEngine.sleep=10;
 			end=new Image("/UI/Win.png");
 			canNext=true;
 		}
@@ -63,6 +73,17 @@ public class C_Arena_AvA extends GameObject
 		r.drawRectangle(2940, 25, p2.getVitality(), 20, 0xff88313C,-1);
 		r.drawRectangle(2940, 42, p2.getVitality()+p2.getToBeParried(), 3, 0xff8C202F,-1);
 		if(p2.getVitality()>=0) r.drawNumber(p2.getVitality(), 2920, 65);
+		
+		r.drawImage(fast, 2400, 350);
+		
+		if(p1.isMyTurn())
+		{
+			r.drawImage(role, 2110, 300);
+		}
+		if(p2.isMyTurn())
+		{
+			r.drawImage(role, 2720, 300);
+		}
 		
 		if(p1.isDrawSpell())
 		{

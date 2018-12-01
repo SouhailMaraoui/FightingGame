@@ -25,7 +25,7 @@ public class C_Arena_PvA extends GameObject
 	
 	private Image attack, parry, heal;
 	private Image hit,chance,spell;
-	private Image panel, pointer,end;
+	private Image panel, pointer,end,role;
 	
 	private int ax=2100,ay=375;
 	private int px=2100,py=425;
@@ -58,6 +58,7 @@ public class C_Arena_PvA extends GameObject
 		hit		=	new Image("/UI/Info/Hit.png");
 		chance	=	new Image("/UI/Info/Chance.png");
 		spell	=	new Image("/Sprites/Spell.png");
+		role	=	new Image("/UI/Role.png");
 		
 		panel= new Image("/UI/Panel2.png");
 		pointer= new Image("/UI/Pointer2.png");
@@ -154,6 +155,15 @@ public class C_Arena_PvA extends GameObject
 		r.drawRectangle(2940, 25, p2.getVitality(), 20, 0xff88313C,-1);
 		r.drawRectangle(2940, 42, p2.getVitality()+p2.getToBeParried(), 3, 0xff8C202F,-1);
 		if(p2.getVitality()>=0) r.drawNumber(p2.getVitality(), 2920, 65);
+		
+		if(p1.isMyTurn())
+		{
+			r.drawImage(role, 2110, 300);
+		}
+		if(p2.isMyTurn())
+		{
+			r.drawImage(role, 2720, 300);
+		}
 		
 		if(p1.isDrawSpell())
 		{

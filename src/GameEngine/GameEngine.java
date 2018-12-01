@@ -10,6 +10,7 @@ public class GameEngine implements Runnable
 	private Input input;
 	private AbstractGame game;
 	private Camera camera;
+	public static int sleep=10;
 
 	private int width=1000, height=550;
 
@@ -41,7 +42,7 @@ public class GameEngine implements Runnable
 			game.render(this, renderer);
 			window.update();	
 			
-			try   {Thread.sleep(10);}
+			try   {Thread.sleep(sleep);}
 			catch (InterruptedException e){};	
 		}
 	}

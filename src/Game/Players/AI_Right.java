@@ -71,11 +71,6 @@ public class AI_Right extends GameObject
 			{
 				Ai(j,p2vit,p1vit);
 			}
-			if(Fcount<2)
-			{
-				p2.setMyTurn(false);
-				p1.setMyTurn(true);
-			}
 		}
 
 		if(Fcount>0)	{Fcount-=1;}	
@@ -85,6 +80,9 @@ public class AI_Right extends GameObject
 	{
 		if(Fcount==70)
 		{
+			p2.setMyTurn(false);
+			p1.setMyTurn(true);
+			
 			if(p1vit<40)
 			{
 				attack();
@@ -118,8 +116,9 @@ public class AI_Right extends GameObject
 	
 	public void attack()
 	{
+		
 		int i=0;
-		if(weapon[0][1]!=null)	{i=r.nextInt(1);}
+		if(weapon[0][1]!=null)	{i=r.nextInt(2);}
 		
 		int [] playerAction=p2.Attack(weapon[0][i]);
 		
@@ -136,12 +135,10 @@ public class AI_Right extends GameObject
 	
 	public void parry()
 	{
-		p2.setMyTurn(false);
-		p1.setMyTurn(true);
 		parrying=true;
 		
 		int i=0;
-		if(weapon[1][1]!=null)	{i=r.nextInt(1);}
+		if(weapon[1][1]!=null)	{i=r.nextInt(2);}
 
 		int [] playerAction=p2.Parry(weapon[1][i]);
 		
@@ -154,7 +151,9 @@ public class AI_Right extends GameObject
 	
 	public void heal()
 	{
-		myHeal=Scripts.ifHit(p2.Heal(weapon[2][0])[0],p2.Heal(weapon[2][0])[1]);
+		int [] playerAction=p2.Heal(weapon[2][0]);
+		myHeal=Scripts.ifHit(playerAction[0],playerAction[1]);
+		
 		if(myHeal==0)	{p2.setMissed(true);}
 		p2.setVitality(Scripts.min(p2.getVitality()+myHeal,p2.getInitVitality()));
 
