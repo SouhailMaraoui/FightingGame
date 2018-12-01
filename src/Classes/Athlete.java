@@ -24,14 +24,14 @@ public class Athlete extends Classe
 		Px=2100;Py=100;
 		Hx=2100;Hy=100;
 		
-		I			=new Image("/Sprites/Athlete/Arena/Idle.png");
-		A1			=new Image("/Sprites/Athlete/Arena/Attack_Dagger.png");
-		A2			=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
-		P			=new Image("/Sprites/Athlete/Arena/Parry.png");
-		H			=new Image("/Sprites/Athlete/Arena/Heal.png");
-		splashArt	=new Image("/SplashArt/Athlete.png");
-				
-		logo=new Image("/Sprites/Athlete/Logo.png");
+		I	=new Image("/Sprites/Athlete/Arena/Idle.png");
+		A1	=new Image("/Sprites/Athlete/Arena/Attack_Dagger.png");
+		A2	=new Image("/Sprites/Athlete/Arena/Attack_Staff.png");
+		P	=new Image("/Sprites/Athlete/Arena/Parry.png");
+		H	=new Image("/Sprites/Athlete/Arena/Heal.png");
+		
+		splashArt	=new Image("/SplashArt/Athlete.png");		
+		logo		=new Image("/Sprites/Athlete/Logo.png");
 
 		
 		image[0]=I;image[1]=A1;image[2]=A2;image[3]=P;image[4]=H;

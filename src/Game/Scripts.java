@@ -2,6 +2,7 @@ package Game;
 
 import java.util.Random;
 import GameEngine.GFX.Image;
+import Classes.Classe;
 
 public class Scripts
 {
@@ -77,5 +78,37 @@ public class Scripts
 		GameManager.objects.clear();
 		GameManager.objects.add(new Game.Rooms.A_ClassSelect());
 	}	
+	
+	public static int imgIndex(Classe p,int i,int j)
+	{
+		int k=0;
+		if(p.getTag()=="Warrior")
+		{
+			switch(i)
+			{
+			case 0:k=1; break;
+			case 1:k=2+j; break;
+			case 2:k=4; break;
+			}
+		}
+		if(p.getTag()=="Athlete")
+		{
+			switch(i)
+			{
+			case 0:k=1+j; break;
+			case 1:k=3; break;
+			case 2:k=4; break;
+			}
+		}if(p.getTag()=="Mage")
+		{
+			switch(i)
+			{
+			case 0:k=1; break;
+			case 1:k=2; break;
+			case 2:k=3; break;
+			}
+		}
+		return k;
+	}
 }
 

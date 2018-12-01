@@ -17,6 +17,10 @@ public class Classe
 	
 	protected int vitality;
 	protected int initVitality;
+	private int toBeParried;
+	private boolean myTurn;
+	private boolean missed;
+	private boolean drawSpell;
 	
 	protected Image[] image=new Image[5];
 	protected int[][] imagePos=new int[5][2];
@@ -170,4 +174,45 @@ public class Classe
 	{
 		return stat;
 	}
+	
+	public int getToBeParried()
+	{
+		return toBeParried;
+	}
+
+	public void setToBeParried(int toBeParried)
+	{
+		this.toBeParried = toBeParried;
+	}
+
+	public boolean isMyTurn()
+	{
+		return myTurn;
+	}
+
+	public void setMyTurn(boolean myTurn)
+	{
+		this.myTurn = myTurn;
+	}
+
+	public boolean isMissed()
+	{
+		return missed;
+	}
+
+	public void setMissed(boolean missed)
+	{
+		this.missed = missed;
+	}
+
+	public boolean isDrawSpell()
+	{
+		return drawSpell;
+	}
+
+	public void setDrawSpell(boolean drawSpell)
+	{
+		this.drawSpell = drawSpell;
+	}
+
 }

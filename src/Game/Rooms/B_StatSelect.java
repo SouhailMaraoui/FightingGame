@@ -11,8 +11,8 @@ import GameEngine.GFX.Image;
 public class B_StatSelect extends GameObject
 {		
 	private Image S1,S2,S3,S4;
-	private int phase=0;
-	public static Image confirm;
+	private int phase=1;
+	public static Image confirm,playerText;
 	private Classe p1,p2;
 	int i=0;
 	int exp=3;
@@ -26,6 +26,7 @@ public class B_StatSelect extends GameObject
 	{
 		p1=A_ClassSelect.getP1();
 		p2=A_ClassSelect.getP2();
+		playerText=new Image("/UI/Player.png");
 		S1=new Image("/UI/Stats/Force.png");
 		S2=new Image("/UI/Stats/Dexterity.png");
 		S3=new Image("/UI/Stats/Intelligence.png");
@@ -41,9 +42,9 @@ public class B_StatSelect extends GameObject
 	
 	public void render(GameEngine ge, Renderer r)
 	{
-		if(phase==1)
+		if(phase==2)
 			p2=statUI(p2,r);
-		if(phase==0)
+		if(phase==1)
 			p1=statUI(p1,r);
 	}
 	
@@ -93,22 +94,24 @@ public class B_StatSelect extends GameObject
 			if(GameManager.EB || Scripts.isClicked(confirm, 1400, 325)) 
 			{
 				player.setStat(stat[0], stat[1], stat[2], stat[3]);
-				if(phase==1)
+				if(phase==2)
 				{
 					phase=-1;
 					canNext=true;
 				}
-				if(phase==0)
+				if(phase==1)
 				{
 					stat=new int[4];
 					stat[0]=statCond(p2)[0][0];
 
-					phase=1;
+					phase=2;
 					i=0;
 				}
 			}
 		}
-		r.drawNumber(100+exp-stat[0]-stat[1]-stat[2]-stat[3], 1000, 0);		
+		r.drawNumber(100+exp-stat[0]-stat[1]-stat[2]-stat[3], 1950, 0);		
+		r.drawImage(playerText, 1000, 0);
+		r.drawNumber(phase, 1100, 0);
 		return player;	
 	}
 	

@@ -14,17 +14,20 @@ import GameEngine.GFX.Image;
 public class A_ClassSelect extends GameObject
 {	
 	private static Classe p1,p2;
-	private Image warrior, athlete, mage;
-	private Image image,wallpaper,background;
+	private Image player,warrior, athlete, mage;
+	private Image PvP,PvA,AvA;
+	private Image image,wallpaper,background,Pointer1Img;
 	public static Classe classe;
 	
-	private int wx=100,wy=20;
-	private int ax=400,ay=20;
-	private int mx=700,my=20;
-	private int Px=0, Py=245;
+	private static String Mode="";
+	
+	private int wx=100,wy=50;
+	private int ax=400,ay=50;
+	private int mx=700,my=50;
+	private int Px=0, Py=275;
 	private int phase=0;
 	
-	private boolean activePointer=false;
+	private boolean Pointer1=false,Pointer2=false;
 	public static boolean canNext=false;
 
 	public A_ClassSelect()
@@ -32,38 +35,53 @@ public class A_ClassSelect extends GameObject
 		GameManager.End=false;
 
 		p1=null;
+		Mode="";
 		
 		wallpaper=new Image("/Wallpaper.png");
 		background=new Image("/Background.png");
 
-
+		Pointer1Img=new Image("/UI/Select.png");
+			
+		player=new Image("/UI/Player.png");
 		warrior=new Image("/Sprites/Warrior/Warrior.png");
 		athlete=new Image("/Sprites/Athlete/Athlete.png");
 		mage=new Image("/Sprites/Mage/Mage.png");
 		
+		PvP=new Image("/UI/PvP.png");
+		PvA=new Image("/UI/PvA.png");
+		AvA=new Image("/UI/AvA.png");
 	}
 	
 	public void update(GameEngine ge, float dt)
 	{	
-		if (phase==1)
+		if (phase==2)
 		{
 			p2=setClasse(p2);
 			
-			if (GameManager.EB && activePointer==true)
+			if (GameManager.EB && Pointer2==true)
 			{
 				canNext=true;
 				phase=-1;
 			}
 		}
 		
-		if (phase==0)
+		if (phase==1)
 		{
 			p1=setClasse(p1);
-			if (GameManager.EB && activePointer==true) 
+			if (GameManager.EB && Pointer2==true) 
 				{
-					activePointer=false;
-					phase=1;
+					Pointer2=false;
+					phase=2;
 				}
+		}
+		if(phase==0)
+		{
+			Mode=setMode();
+			if (GameManager.EB && Pointer1==true) 
+			{
+				Pointer1=false;
+				phase=1;
+			}
 		}
 	}
 
@@ -75,14 +93,28 @@ public class A_ClassSelect extends GameObject
 		
 		r.drawImage(background, 2000, 0);
 		r.drawImage(wallpaper,0,0);
-		if(activePointer)
+		if(Pointer1)
+		{
+			r.drawImage(Pointer1Img, Px, 100);
+		}
+		if(Pointer2)
 		{
 			r.drawImage(image, Px, Py);
 		}
-		r.drawImage(warrior,wx,wy);
-		r.drawImage(athlete,ax,ay);
-		r.drawImage(mage,mx,my);	
-		r.drawNumber(phase, 0, 0);
+		if(phase==0)
+		{
+			r.drawImage(PvP,wx,100);
+			r.drawImage(PvA,ax,100);
+			r.drawImage(AvA,mx,100);
+		}
+		else
+		{
+			r.drawImage(player, 0, 0);
+			r.drawNumber(phase, 100, 0);
+			r.drawImage(warrior,wx,wy);
+			r.drawImage(athlete,ax,ay);
+			r.drawImage(mage,mx,my);
+		}
 	}
 
 	private Classe setClasse(Classe player)
@@ -94,7 +126,7 @@ public class A_ClassSelect extends GameObject
 			player.setTag("Warrior");
 			
 			image= new Image("/UI/Warrior.png");
-			activePointer=true;
+			Pointer2=true;
 			Px=wx;
 		}
 		
@@ -105,7 +137,7 @@ public class A_ClassSelect extends GameObject
 			player.setTag("Athlete");
 			
 			image= new Image("/UI/Athlete.png");
-			activePointer=true;
+			Pointer2=true;
 			Px=ax;	
 		}
 
@@ -116,10 +148,33 @@ public class A_ClassSelect extends GameObject
 			player.setTag("Mage");
 			
 			image= new Image("/UI/Mage.png");
-			activePointer=true;
+			Pointer2=true;
 			Px=mx;
 		}
 		return player;
+	}
+	
+	private String setMode()
+	{
+		if(Scripts.isClicked(PvP, wx, 100))
+		{
+			Mode="PvP";
+			Pointer1=true;
+			Px=wx;	
+		}
+		if(Scripts.isClicked(PvA, ax, 100))
+		{
+			Mode="PvA";
+			Pointer1=true;
+			Px=ax;	
+		}
+		if(Scripts.isClicked(AvA, mx, 100))
+		{
+			Mode="AvA";
+			Pointer1=true;
+			Px=mx;
+		}
+		return Mode;
 	}
 	
 	public static Classe getP1()
@@ -130,5 +185,10 @@ public class A_ClassSelect extends GameObject
 	public static Classe getP2()
 	{
 		return p2;
+	}
+	
+	public static String getMode()
+	{
+		return Mode;
 	}
 }

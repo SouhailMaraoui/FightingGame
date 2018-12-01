@@ -24,14 +24,14 @@ public class Warrior extends Classe
 		P2x=2100;P2y=100;
 		Hx=2090;Hy=3;
 		
-		I=new Image("/Sprites/Warrior/Arena/Idle.png");	
-		A=new Image("/Sprites/Warrior/Arena/Attack.png");
-		P1=new Image("/Sprites/Warrior/Arena/Parry.png");
-		P2=new Image("/Sprites/Warrior/Arena/Parry.png");
-		H=new Image("/Sprites/Warrior/Arena/Heal.png");
-		splashArt=new Image("/SplashArt/Warrior.png");
+		I	=new Image("/Sprites/Warrior/Arena/Idle.png");	
+		A	=new Image("/Sprites/Warrior/Arena/Attack.png");
+		P1	=new Image("/Sprites/Warrior/Arena/Parry.png");
+		P2	=new Image("/Sprites/Warrior/Arena/Parry.png");
+		H	=new Image("/Sprites/Warrior/Arena/Heal.png");
 		
-		logo=new Image("/Sprites/Warrior/Logo.png");
+		splashArt	=new Image("/SplashArt/Warrior.png");
+		logo		=new Image("/Sprites/Warrior/Logo.png");
 
 		image[0]=I;image[1]=A;image[2]=P1;image[3]=P2;image[4]=H;
 		imagePos[0][0]=Ix;imagePos[1][0]=Ax;imagePos[2][0]=P1x;imagePos[3][0]=P2x;imagePos[4][0]=Hx;
