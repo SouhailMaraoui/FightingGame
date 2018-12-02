@@ -14,7 +14,7 @@ import GameEngine.GFX.Image;
 
 public class C_Arena_PvA extends GameObject
 {
-	public static boolean canNext;
+	public static boolean canNext=false;
 	
 	private Classe p1,p2;
 	

@@ -5,15 +5,18 @@ import GameEngine.GFX.Image;
 
 public class Classe
 {
-	private String tag;
+	protected String tag;
+	protected String name;
 	
-	protected int[] stat=new int[4];
+	protected int[] stat;
+	protected int[][] statCond;
 	protected Image logo,splashArt;
 	
 	protected int force=0;
 	protected int dexterity=0;
 	protected int intelligence=0;
 	protected int concentration=0;
+	protected int exp=3;
 	
 	protected int vitality;
 	protected int initVitality;
@@ -21,6 +24,7 @@ public class Classe
 	private boolean myTurn;
 	private boolean missed;
 	private boolean drawSpell;
+	private boolean isNew=true;
 	
 	protected Image[] image=new Image[5];
 	protected int[][] imagePos=new int[5][2];
@@ -28,15 +32,15 @@ public class Classe
 	
 	public Classe()
 	{
-		
 	}
 	
 	public void setStat(int force,int dexterity, int intelligence, int concentration)
 	{
-		this.force=force;
-		this.dexterity=dexterity;
-		this.intelligence=intelligence;
-		this.concentration=concentration;
+		stat=new int[4];
+		this.force=stat[0]=force;
+		this.dexterity=stat[1]=dexterity;
+		this.intelligence=stat[2]=intelligence;
+		this.concentration=stat[3]=concentration;
 	}
 	
 	public void update(GameEngine ge, float dt)
@@ -213,6 +217,46 @@ public class Classe
 	public void setDrawSpell(boolean drawSpell)
 	{
 		this.drawSpell = drawSpell;
+	}
+
+	public boolean isNew()
+	{
+		return isNew;
+	}
+
+	public void setNew(boolean isNew)
+	{
+		this.isNew = isNew;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public int[][] getStatCond()
+	{
+		return statCond;
+	}
+
+	public void setStatCond(int[][] statCond)
+	{
+		this.statCond = statCond;
+	}
+
+	public int getExp()
+	{
+		return exp;
+	}
+
+	public void setExp(int exp)
+	{
+		this.exp = exp;
 	}
 
 }

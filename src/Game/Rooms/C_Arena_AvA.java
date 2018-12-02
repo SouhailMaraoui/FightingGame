@@ -12,15 +12,18 @@ import GameEngine.GFX.Image;
 
 public class C_Arena_AvA extends GameObject
 {
-	public static boolean canNext;
+	public static boolean canNext=false;
 	
 	private Classe p1,p2;
 	private AI_Left P1;
 	private AI_Right P2;	
 	private Image end,spell,role,fast;
 	
+	public static Classe winner=null;
+	
 	public C_Arena_AvA()
 	{
+		winner=null;
 		P1=new AI_Left();
 		P2=new AI_Right();
 		
@@ -39,26 +42,32 @@ public class C_Arena_AvA extends GameObject
 	{
 		if(Scripts.isClicked(fast, 2400, 350))
 		{
-			GameEngine.sleep=1;
+			ge.setSleep(1);
 		}
 		
-		if(p1.getVitality()<=0)
+		if(p1.getVitality()<=0 && winner==null)
 		{
-			GameEngine.sleep=10;
+			winner=p2;
+			ge.setSleep(10);
 			end=new Image("/UI/Loss.png");
 			canNext=true;
+			p1.setMyTurn(false);
+			p2.setMyTurn(false);
 		}
-		if(p2.getVitality()<=0)
+		if(p2.getVitality()<=0 && winner==null)
 		{
-			GameEngine.sleep=10;
+			winner=p1;
+			ge.setSleep(10);
 			end=new Image("/UI/Win.png");
 			canNext=true;
+			p1.setMyTurn(false);
+			p2.setMyTurn(false);
 		}
 	}
 
 	public void render(GameEngine ge, Renderer r)
 	{
-		if(p2.getVitality()<0 || p1.getVitality()<0) {r.drawImage(end, 2350, 100);}
+		if(p2.getVitality()<=0 || p1.getVitality()<=0) {r.drawImage(end, 2350, 100);}
 		
 		//Draw-Player-1-Health---------------------------------------------------------------------------
 		r.drawImage(p1.getLogo(), 2010,10);

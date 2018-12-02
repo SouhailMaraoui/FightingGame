@@ -23,6 +23,8 @@ public class Renderer
 	Image n9=new Image("/Numbers/9.png");
 	Image n0=new Image("/Numbers/0.png");
 	
+	Image Letters=new Image("/Letters.png");
+	
 	Image up=new Image("/UI/Next.png");
 	Image down=new Image("/UI/Previous.png");
 	
@@ -64,6 +66,23 @@ public class Renderer
 			}
 		}
 	}
+	public void drawImageTile(Image image, int offX, int offY,int Pos,int TileWidth)
+	{
+		int newx=0;
+		int newy=0;
+		int newW=TileWidth;
+		int newH=image.getH();
+		
+		for(int y=newy;y<newH;y++)
+		{
+			for(int x=newx;x<newW;x++)
+			{
+				setPixel(x+offX,y+offY,image.getP()[x+Pos*TileWidth+y*image.getW()]);
+			}
+		}
+	}
+	
+	
 	public void drawImageReversed(Image image, int offX, int offY)
 	{
 		int newx=0;
@@ -99,6 +118,21 @@ public class Renderer
 			case '9':	drawImage(n9,x,y);break;
 			case '0':	drawImage(n0,x,y);break;
 			}
+			x+=25;
+		}
+	}
+	
+	public void drawString(String string,int x,int y)
+	{
+		int index=0;
+		string=string.toUpperCase();
+		for(char c:string.toCharArray())
+		{
+			if(c==' ')
+			{index=26;}
+			else
+			{index=(int)c-(int)'A';}
+			drawImageTile(Letters, x, y, index, 20);
 			x+=25;
 		}
 	}

@@ -37,7 +37,7 @@ public class GameManager extends AbstractGame
 
 		offX=camera.getOffX();
 		offY=camera.getOffY();
-	
+
 		MX=ge.getInput().getMouseX();
 		MY=ge.getInput().getMouseY();
 		MB=ge.getInput().isKeyDown(MouseEvent.BUTTON1);

@@ -32,7 +32,7 @@ public class Athlete extends Classe
 		
 		splashArt	=new Image("/SplashArt/Athlete.png");		
 		logo		=new Image("/Sprites/Athlete/Logo.png");
-
+		tag="Athlete";
 		
 		image[0]=I;image[1]=A1;image[2]=A2;image[3]=P;image[4]=H;
 		

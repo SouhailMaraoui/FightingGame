@@ -28,6 +28,7 @@ public class Mage extends Classe
 		
 		splashArt	=new Image("/SplashArt/Mage.png");		
 		logo		=new Image("/Sprites/Mage/Logo.png");
+		tag="Mage";
 
 		image[0]=I;image[1]=A;image[2]=P;image[3]=H;
 		

@@ -10,7 +10,7 @@ public class GameEngine implements Runnable
 	private Input input;
 	private AbstractGame game;
 	private Camera camera;
-	public static int sleep=10;
+	private int sleep=10;
 
 	private int width=1000, height=550;
 
@@ -80,5 +80,10 @@ public class GameEngine implements Runnable
 	public Camera getCamera()
 	{
 		return camera;
+	}
+	
+	public void setSleep(int sleep2)
+	{
+		this.sleep = sleep2;
 	}
 }

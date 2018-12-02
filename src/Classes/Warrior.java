@@ -32,6 +32,7 @@ public class Warrior extends Classe
 		
 		splashArt	=new Image("/SplashArt/Warrior.png");
 		logo		=new Image("/Sprites/Warrior/Logo.png");
+		tag="Warrior";
 
 		image[0]=I;image[1]=A;image[2]=P1;image[3]=P2;image[4]=H;
 		imagePos[0][0]=Ix;imagePos[1][0]=Ax;imagePos[2][0]=P1x;imagePos[3][0]=P2x;imagePos[4][0]=Hx;

@@ -15,7 +15,7 @@ public class B_StatSelect extends GameObject
 	public static Image confirm,playerText;
 	private Classe p1,p2;
 	int i=0;
-	int exp=3;
+	int exp;
 	public static int[] stat=new int[4];
 	int[][] statCond=new int[4][2];
 	boolean test=true;
@@ -32,12 +32,12 @@ public class B_StatSelect extends GameObject
 		S3=new Image("/UI/Stats/Intelligence.png");
 		S4=new Image("/UI/Stats/Concentration.png");
 		confirm=new Image("/SplashArt/Confirm.png");
-		stat[0]=statCond(p1)[0][0];
+		if(p1.getStat()==null){stat[0]=statCond(p1)[0][0];}
+		else {stat=p1.getStat();i=4;}
 	}
 
 	public void update(GameEngine ge, float dt)
 	{
-		
 	}
 	
 	public void render(GameEngine ge, Renderer r)
@@ -50,20 +50,21 @@ public class B_StatSelect extends GameObject
 	
 	private Classe statUI(Classe player,Renderer r)
 	{
+		exp=player.getExp();
 		r.drawImage(player.getSplashArt(),1000, 0);
 		
 		if(i==0)
 		{
 			stat[0]=r.setStat(stat[0], 1500, 100,statCond(player)[0][0],statCond(player)[0][1]);
 			r.drawImage(S1, 1250, 100);
-			if(GameManager.EB) {i=1;stat[1]=statCond(player)[1][0];}
+			if(GameManager.EB) {i=1;if(player.getStat()==null)stat[1]=statCond(player)[1][0];else stat[1]=player.getStat()[1];}
 			
 		}
 		else if(i==1)
 		{
 			r.drawNumber(stat[0], 1600, 105);r.drawImage(S1, 1250, 100);r.drawImage(S2, 1250, 150);
 			stat[1]=r.setStat(stat[1], 1500, 150,statCond(player)[1][0],statCond(player)[1][1]);
-			if(GameManager.EB) {i=2;stat[2]=statCond(player)[2][0];}
+			if(GameManager.EB) {i=2;if(player.getStat()==null)stat[2]=statCond(player)[2][0];else stat[2]=player.getStat()[2];}
 			
 		}
 		else if(i==2)
@@ -71,7 +72,7 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[0], 1600, 105);r.drawImage(S1, 1250, 100);
 			r.drawNumber(stat[1], 1600, 155);r.drawImage(S2, 1250, 150);r.drawImage(S3, 1250, 200);
 			stat[2]=r.setStat(stat[2], 1500, 200,statCond(player)[2][0],statCond(player)[2][1]);
-			if(GameManager.EB) {i=3;stat[3]=statCond(player)[3][0];}
+			if(GameManager.EB) {i=3;if(player.getStat()==null)stat[3]=statCond(player)[3][0];else stat[3]=player.getStat()[3];}
 		}
 		else if(i==3)
 		{
@@ -88,12 +89,13 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[2], 1600, 205);r.drawImage(S3, 1250, 200);
 			r.drawNumber(stat[3], 1600, 255);r.drawImage(S4, 1250, 250);
 			
-			player.setInitVitality(200+3-stat[0]-stat[1]-stat[2]-stat[3]);
+			player.setInitVitality(200+player.getExp()-stat[0]-stat[1]-stat[2]-stat[3]);
 			r.drawImage(confirm, 1400, 325);
-			if(GameManager.Esc) {i=0;}
+			if(GameManager.Esc && player.isNew()) {i=0;}
 			if(GameManager.EB || Scripts.isClicked(confirm, 1400, 325)) 
 			{
 				player.setStat(stat[0], stat[1], stat[2], stat[3]);
+				if(player.isNew()) {Scripts.FileWrite("Players.txt",player.getName()+":"+player.getTag().charAt(0)+":"+stat[0]+":"+stat[1]+":"+stat[2]+":"+stat[3]+":"+player.getExp()+";",true);player.setNew(false);player.setStatCond(statCond);}
 				if(phase==2)
 				{
 					phase=-1;
@@ -102,10 +104,10 @@ public class B_StatSelect extends GameObject
 				if(phase==1)
 				{
 					stat=new int[4];
-					stat[0]=statCond(p2)[0][0];
+					if(p2.getStat()==null){stat[0]=statCond(p2)[0][0];i=0;}
+					else {stat=p2.getStat();i=4;}
 
 					phase=2;
-					i=0;
 				}
 			}
 		}
