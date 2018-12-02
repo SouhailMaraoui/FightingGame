@@ -1,29 +1,29 @@
 package Game.Rooms;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
 import Game.Players.AI_Left;
 import Game.Players.AI_Right;
 import GameEngine.GameEngine;
+import GameEngine.Image;
 import GameEngine.Renderer;
-import GameEngine.GFX.Image;
 
 public class C_Arena_AvA extends GameObject
 {
 	public static boolean canNext=false;
 	
-	private Classe p1,p2;
+	private Fighter p1,p2;
 	private AI_Left P1;
 	private AI_Right P2;	
 	private Image end,spell,role,fast;
 	
-	public static Classe winner=null;
+	public static Fighter winner=null,losser=null;
 	
 	public C_Arena_AvA()
 	{
-		winner=null;
+		winner=losser=null;
 		P1=new AI_Left();
 		P2=new AI_Right();
 		
@@ -48,6 +48,7 @@ public class C_Arena_AvA extends GameObject
 		if(p1.getVitality()<=0 && winner==null)
 		{
 			winner=p2;
+			losser=p1;
 			ge.setSleep(10);
 			end=new Image("/UI/Loss.png");
 			canNext=true;
@@ -57,6 +58,7 @@ public class C_Arena_AvA extends GameObject
 		if(p2.getVitality()<=0 && winner==null)
 		{
 			winner=p1;
+			losser=p2;
 			ge.setSleep(10);
 			end=new Image("/UI/Win.png");
 			canNext=true;

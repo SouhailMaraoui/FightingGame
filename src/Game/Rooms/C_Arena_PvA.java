@@ -2,21 +2,22 @@ package Game.Rooms;
 
 import java.util.ArrayList;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Classes.Weapon;
 import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
 import Game.Players.Player_Left;
 import GameEngine.GameEngine;
+import GameEngine.Image;
 import GameEngine.Renderer;
-import GameEngine.GFX.Image;
 
 public class C_Arena_PvA extends GameObject
 {
 	public static boolean canNext=false;
 	
-	private Classe p1,p2;
+	private Fighter p1,p2;
+	public static Fighter winner=null,losser=null;
 	
 	public static ArrayList<Image> weaponList= new ArrayList<Image>();
 	private Weapon[][] weapon1;
@@ -42,6 +43,7 @@ public class C_Arena_PvA extends GameObject
 	
 	public C_Arena_PvA()
 	{
+		winner=losser=null;
 		GameManager.objects.add(new Game.Players.AI_Right());
 		GameManager.objects.add(new Game.Players.Player_Left());
 		
@@ -100,15 +102,23 @@ public class C_Arena_PvA extends GameObject
 		if(Scripts.isTrueInList(P1T2))	{additionalInfo=true;}
 		else 							{additionalInfo=false;}
 		
-		if(p1.getVitality()<=0)
+		if(p1.getVitality()<=0 && winner==null)
 		{
+			winner=p2;
+			losser=p1;
 			end=new Image("/UI/Loss.png");
 			canNext=true;
+			p1.setMyTurn(false);
+			p2.setMyTurn(false);
 		}
-		if(p2.getVitality()<=0)
+		if(p2.getVitality()<=0 && winner==null)
 		{
+			winner=p1;
+			losser=p2;
 			end=new Image("/UI/Win.png");
 			canNext=true;
+			p1.setMyTurn(false);
+			p2.setMyTurn(false);
 		}
 		
 	}

@@ -1,6 +1,5 @@
 package GameEngine;
 
-import Game.Camera;
 
 public class GameEngine implements Runnable
 {
@@ -9,7 +8,6 @@ public class GameEngine implements Runnable
 	private Renderer renderer;
 	private Input input;
 	private AbstractGame game;
-	private Camera camera;
 	private int sleep=10;
 
 	private int width=1000, height=550;
@@ -77,10 +75,6 @@ public class GameEngine implements Runnable
 		return renderer;
 	}
 
-	public Camera getCamera()
-	{
-		return camera;
-	}
 	
 	public void setSleep(int sleep2)
 	{

@@ -2,21 +2,21 @@ package Game.Players;
 
 import java.util.Random;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Classes.Weapon;
 import Game.GameObject;
 import Game.Scripts;
 import Game.Rooms.A_ClassSelect;
 import GameEngine.GameEngine;
+import GameEngine.Image;
 import GameEngine.Renderer;
-import GameEngine.GFX.Image;
 
 public class AI_Left extends GameObject
 {
 	public static int myDamage=0,myHeal=0;
 	public static int Fcount;
 
-	private static Classe p1,p2;
+	private static Fighter p1,p2;
 
 	private Weapon[][] weapon;
 	private Image[] image;
@@ -79,6 +79,19 @@ public class AI_Left extends GameObject
 		}
 
 		if(Fcount>0)	{Fcount-=1;}	
+	}
+	
+	public void render(GameEngine ge, Renderer r)
+	{
+		r.drawImage(player, px, py);
+		if(p1.getToBeParried()>0)
+		{
+			r.drawNumber(p1.getToBeParried(), 2100, 70);
+		}		
+		if(p1.isMissed())
+		{
+			r.drawImage(missed, 2350,100);
+		}
 	}
 	
 	public void Ai(int i, int p1vit, int p2vit)
@@ -162,19 +175,6 @@ public class AI_Left extends GameObject
 		player=image[k];px=imagePos[k][0];py=imagePos[k][1];
 	}
 	
-	public void render(GameEngine ge, Renderer r)
-	{
-		r.drawImage(player, px, py);
-		if(p1.getToBeParried()>0)
-		{
-			r.drawNumber(p1.getToBeParried(), 2100, 70);
-		}		
-		if(p1.isMissed())
-		{
-			r.drawImage(missed, 2350,100);
-		}
-	}
-
 	public static int getToBeParried()
 	{
 		return p1.getToBeParried();

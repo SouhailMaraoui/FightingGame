@@ -1,8 +1,8 @@
 package Classes;
 
-import GameEngine.GFX.Image;
+import GameEngine.Image;
 
-public class Mage extends Classe
+public class Mage extends Fighter
 {
 	private static Image I,A,P,H;
 	
@@ -13,8 +13,8 @@ public class Mage extends Classe
 	
 	public Mage()
 	{		
-		Weapon staff=new Weapon(190,70,80); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon grimoire=new Weapon(200,65,0);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
+		Weapon staff=new Weapon(190,60,80); staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon grimoire=new Weapon(200,55,0);grimoire.setTag("Grimoire"); 	grimoire.setImage("/UI/Info/Grimoire.png");
 		
 		Ix=2100;Iy=100;
 		Ax=2100;Ay=100;

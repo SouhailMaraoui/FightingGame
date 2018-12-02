@@ -1,6 +1,6 @@
 package Game.Rooms;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Classes.Warrior;
 
 import javax.swing.JOptionPane; 
@@ -13,19 +13,19 @@ import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
 import GameEngine.GameEngine;
+import GameEngine.Image;
 import GameEngine.Renderer;
-import GameEngine.GFX.Image;
 
 public class A_ClassSelect extends GameObject
 {	
-	private static Classe p1,p2;
+	private static Fighter p1,p2;
 	private Image player,warrior, athlete, mage;
 	private Image PvP,PvA,AvA;
 	private Image image,wallpaper,background,Pointer1Img;
 	private Image newP,loadP;
 	private Image namePointer,setName;
 	private Image experience;
-	public static Classe classe;
+	public static Fighter classe;
 	
 	String name=null;
 	
@@ -51,8 +51,8 @@ public class A_ClassSelect extends GameObject
 	{
 		GameManager.End=false;
 
-		p1=new Classe();
-		p2=new Classe();
+		p1=new Fighter();
+		p2=new Fighter();
 		Mode="";
 		
 		experience=new Image("/UI/Stats/Experience.png");
@@ -85,7 +85,7 @@ public class A_ClassSelect extends GameObject
 				p2=setClasseNew(p2);
 				if(Scripts.isClicked(setName, 400, 0) && !NameSet)
 				{
-			        name= JOptionPane.showInputDialog("Enter player 2 Name");
+			        name= JOptionPane.showInputDialog("Enter player 2 Name (A-Z) Must be unique");
 			        name=name.toUpperCase();
 			        NameSet=true;
 				}
@@ -113,7 +113,7 @@ public class A_ClassSelect extends GameObject
 				p1=setClasseNew(p1);
 				if(Scripts.isClicked(setName, 400, 0) && !NameSet)
 				{
-			        name= JOptionPane.showInputDialog("Enter player 1 Name");
+			        name= JOptionPane.showInputDialog("Enter player 1 Name (A-Z) Must be unique");
 			        name=name.toUpperCase();
 			        NameSet=true;
 				}
@@ -213,12 +213,13 @@ public class A_ClassSelect extends GameObject
 			
 			if(drawList)
 			{
-				r.drawImage(experience, 400, 20);
+				r.drawImage(experience, 450, 20);
 				int y=100;
 				for(int i=0;i<names.length;i++)
 				{
 					r.drawImage(namePointer, 25, y);
 					r.drawString(names[i], 100, y+5);
+					r.drawString(Character.toString(classeTag[i]), 375, y);
 					r.drawNumber(exp[i], 450, y+5);
 					y+=50;
 				}
@@ -247,7 +248,7 @@ public class A_ClassSelect extends GameObject
 		}
 	}
 
-	private Classe LoadClasse(Classe player)
+	private Fighter LoadClasse(Fighter player)
 	{
 		ArrayList<String> players=Scripts.FileRead("Players.txt");
 		int k=0;
@@ -316,7 +317,7 @@ public class A_ClassSelect extends GameObject
 				{
 					player =new Warrior();
 					player.setStat(force[j], dexterity[j], intelligence[j], concentration[j]);
-					player.setInitVitality(200+exp[j]-force[j]- dexterity[j]- intelligence[j]- concentration[j]);
+					player.setInitVitality(200+3*exp[j]-force[j]- dexterity[j]- intelligence[j]- concentration[j]);
 					player.setExp(exp[j]);
 					player.setName(names[j]);
 					player.setNew(false);
@@ -325,7 +326,7 @@ public class A_ClassSelect extends GameObject
 				{
 					player =new Athlete();
 					player.setStat(force[j], dexterity[j], intelligence[j], concentration[j]);
-					player.setInitVitality(200+exp[j]-force[j]- dexterity[j]- intelligence[j]- concentration[j]);
+					player.setInitVitality(200+3*exp[j]-force[j]- dexterity[j]- intelligence[j]- concentration[j]);
 					player.setExp(exp[j]);
 					player.setName(names[j]);
 					player.setNew(false);
@@ -334,7 +335,7 @@ public class A_ClassSelect extends GameObject
 				{
 					player =new Mage();
 					player.setStat(force[j], dexterity[j], intelligence[j], concentration[j]);
-					player.setInitVitality(200+exp[j]-force[j]- dexterity[j]- intelligence[j]- concentration[j]);
+					player.setInitVitality(200+3*exp[j]-force[j]- dexterity[j]- intelligence[j]- concentration[j]);
 					player.setExp(exp[j]);
 					player.setName(names[j]);
 					player.setNew(false);
@@ -346,7 +347,7 @@ public class A_ClassSelect extends GameObject
 		return player;
 	}
 	
-	private Classe setClasseNew(Classe player)
+	private Fighter setClasseNew(Fighter player)
 	{		
 		if(Scripts.isClicked(warrior,wx,wy))
 		{
@@ -403,19 +404,19 @@ public class A_ClassSelect extends GameObject
 		return Mode;
 	}
 	
-	private Classe setExp(Classe player, Renderer r)
+	private Fighter setExp(Fighter player, Renderer r)
 	{
 		r.drawImage(experience, 300, 400);
 		player.setExp(r.setStat(player.getExp(), 550, 410, 1, 4));
 		return player;
 	}
 	
-	public static Classe getP1()
+	public static Fighter getP1()
 	{
 		return p1;
 	}
 
-	public static Classe getP2()
+	public static Fighter getP2()
 	{
 		return p2;
 	}

@@ -4,7 +4,6 @@ import java.awt.image.DataBufferInt;
 
 import Game.GameManager;
 import Game.Scripts;
-import GameEngine.GFX.Image;
 
 public class Renderer
 {
@@ -164,20 +163,11 @@ public class Renderer
 		drawNumber(stat,x+100,y+5);
 		return stat;
 	}
-	
-	public int getCamX()
-	{
-		return camX;
-	}
+
 
 	public void setCamX(int camX)
 	{
 		this.camX = camX;
-	}
-
-	public int getCamY()
-	{
-		return camY;
 	}
 
 	public void setCamY(int camY)

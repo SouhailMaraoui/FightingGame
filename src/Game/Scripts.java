@@ -8,8 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import GameEngine.GFX.Image;
-import Classes.Classe;
+
+import Classes.Fighter;
+import GameEngine.Image;
 
 public class Scripts
 {
@@ -64,23 +65,13 @@ public class Scripts
 		return a;
 	}
 	
-	public static boolean isSinT(String S,String[] T)
-	{
-		for(int i=0;i<T.length;i++)
-		{
-			if(S==T[i])
-				return true;
-		}
-		return false;
-	}
-	
 	public static void restart()
 	{
 		GameManager.objects.clear();
 		GameManager.objects.add(new Game.Rooms.A_ClassSelect());
 	}	
 	
-	public static int imgIndex(Classe p,int i,int j)
+	public static int imgIndex(Fighter p,int i,int j)
 	{
 		int k=0;
 		if(p.getTag()=="Warrior")
@@ -178,72 +169,6 @@ public class Scripts
 			else break;
 		}
 		return name;
-	}
-	
-	public static int[][] statCond(Classe player)
-	{
-		int exp=player.getExp();
-		int[] stat=player.getStat();
-		int[][] statCond=new int[4][2];
-		if (player.getTag()=="Warrior")
-		{			
-			int force=stat[0];
-			int dexterity=stat[1];
-			int intelligence=stat[2];
-			
-			//force-------------------------------------------------------
-			statCond[0][0]=10;
-			statCond[0][1]=100+exp;
-			//dexterity---------------------------------------------------
-			statCond[1][0]=0;
-			statCond[1][1]=Scripts.min(force-10,100+exp-force);
-			//intelligence------------------------------------------------
-			statCond[2][0]=0;
-			statCond[2][1]=Scripts.min(dexterity,100+exp-force-dexterity);
-			//concentration-----------------------------------------------
-			statCond[3][0]=0;
-			statCond[3][1]=Scripts.min(intelligence+10,100+exp-force-dexterity-intelligence);
-		}
-		if (player.getTag()=="Athlete")
-		{			
-			int force=stat[0];
-			int dexterity=stat[1];
-			int intelligence=stat[2];
-			
-			//force--------------------------------------------------------
-			statCond[0][0]=21;
-			statCond[0][1]=100+exp-63;
-			//dexterity----------------------------------------------------
-			statCond[1][0]=21;
-			statCond[1][1]=100+exp-force-42;
-			//intelligence-------------------------------------------------
-			statCond[2][0]=21;
-			statCond[2][1]=100+exp-force-dexterity-21;
-			//concentration------------------------------------------------
-			statCond[3][0]=21;
-			statCond[3][1]=100+exp-force-dexterity-intelligence;
-		}
-		if (player.getTag()=="Mage")
-		{
-			
-			int force=stat[0];
-			int dexterity=stat[1];
-			int intelligence=stat[2];
-			
-			//force--------------------------------------------------------
-			statCond[0][0]=0;
-			statCond[0][1]=(int)((70+exp)/4.0-0.01f);
-			//dexterity----------------------------------------------------
-			statCond[1][0]=0;
-			statCond[1][1]=Scripts.min(((int)((70+exp)/4.0-0.01f)),(int)((70+exp)/2-force-0.01f));
-			//intelligence-------------------------------------------------
-			statCond[2][0]=Scripts.max(force,dexterity)+16;
-			statCond[2][1]=100+exp-force-dexterity-(16+Scripts.max(force,dexterity));
-			//concentration------------------------------------------------
-			statCond[3][0]=Scripts.max(force,dexterity)+16;
-			statCond[3][1]=100+exp-force-dexterity-intelligence;
-		}
-		return statCond;
 	}
 }
 

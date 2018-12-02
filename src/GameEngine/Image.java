@@ -1,4 +1,4 @@
-package GameEngine.GFX;
+package GameEngine;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

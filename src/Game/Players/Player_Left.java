@@ -2,7 +2,7 @@ package Game.Players;
 
 import java.util.ArrayList;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Classes.Weapon;
 import Game.GameManager;
 import Game.GameObject;
@@ -11,13 +11,13 @@ import Game.Rooms.A_ClassSelect;
 import Game.Rooms.C_Arena_PvP;
 import Game.Rooms.C_Arena_PvA;
 import GameEngine.GameEngine;
+import GameEngine.Image;
 import GameEngine.Renderer;
-import GameEngine.GFX.Image;
 
 public class Player_Left extends GameObject
 {
-	private static Classe p1;
-	private static Classe p2;
+	private static Fighter p1;
+	private static Fighter p2;
 		
 	private Image player,missed;
 	private Image[] image;
@@ -156,14 +156,7 @@ public class Player_Left extends GameObject
 		}
 		if(Fcount>0) {Fcount-=1;}		
 	}
-	
-	public void parry()
-	{
-		parrying=true;
-		p1.setToBeParried(Scripts.ifHit(playerAction[0],playerAction[1]));
-		if(p1.getToBeParried()==0) {p1.setMissed(true);parrying=false;}
-	}
-	
+
 	public void render(GameEngine ge, Renderer r)
 	{
 		r.drawImage(player, px, py);
@@ -175,5 +168,12 @@ public class Player_Left extends GameObject
 		{
 			r.drawImage(missed, 2350,100);
 		}
+	}
+	
+	public void parry()
+	{
+		parrying=true;
+		p1.setToBeParried(Scripts.ifHit(playerAction[0],playerAction[1]));
+		if(p1.getToBeParried()==0) {p1.setMissed(true);parrying=false;}
 	}
 }

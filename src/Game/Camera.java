@@ -1,6 +1,6 @@
 package Game;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Game.Rooms.*;
 import GameEngine.GameEngine;
 
@@ -31,11 +31,11 @@ public class Camera
 		if((Game.Rooms.C_Arena_PvP.canNext || Game.Rooms.C_Arena_PvA.canNext ||  Game.Rooms.C_Arena_AvA.canNext) && GameManager.EB)
 		{		
 			C_Arena_PvP.canNext=C_Arena_PvA.canNext=C_Arena_AvA.canNext=false;
-			Classe winner=new Classe();
-			if		(A_ClassSelect.getMode()=="PvP") {winner=C_Arena_AvA.winner;}
-			else if	(A_ClassSelect.getMode()=="PvA") {winner=C_Arena_AvA.winner;}
-			else if	(A_ClassSelect.getMode()=="AvA") {winner=C_Arena_AvA.winner;}
-			GameManager.objects.add(new Game.Rooms.D_AddExpToStat(winner));
+			Fighter winner=new Fighter(),losser=new Fighter();
+			if		(A_ClassSelect.getMode()=="PvP") {winner=C_Arena_PvP.winner;losser=C_Arena_PvP.losser;}
+			else if	(A_ClassSelect.getMode()=="PvA") {winner=C_Arena_PvA.winner;losser=C_Arena_PvA.losser;}
+			else if	(A_ClassSelect.getMode()=="AvA") {winner=C_Arena_AvA.winner;losser=C_Arena_AvA.losser;}
+			GameManager.objects.add(new Game.Rooms.D_AddExpToStat(winner,losser));
 			offX=3000;			
 		}
 		
@@ -62,9 +62,5 @@ public class Camera
 	public int getOffY()
 	{
 		return offY;
-	}
-	public void setOffX(int offX)
-	{
-		this.offX = offX;
 	}
 }

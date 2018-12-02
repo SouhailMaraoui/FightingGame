@@ -1,39 +1,38 @@
 package Classes;
 
 import GameEngine.GameEngine;
-import GameEngine.GFX.Image;
+import GameEngine.Image;
 
-public class Classe
+public class Fighter
 {
-	protected String tag;
-	protected String name;
+	protected String tag,name;
+	protected Image logo,splashArt;
 	
 	protected int[] stat;
 	protected int[][] statCond;
-	protected Image logo,splashArt;
 	
+	protected int vitality;
+	protected int initVitality;
 	protected int force=0;
 	protected int dexterity=0;
 	protected int intelligence=0;
 	protected int concentration=0;
 	protected int exp=3;
+
+	protected Image[] image=new Image[5];
+	protected int[][] imagePos=new int[5][2];
 	
-	protected int vitality;
-	protected int initVitality;
+	protected Weapon[][] weapon=new Weapon[3][2];
+	
 	private int toBeParried;
 	private boolean myTurn;
 	private boolean missed;
 	private boolean drawSpell;
 	private boolean isNew=true;
 	
-	protected Image[] image=new Image[5];
-	protected int[][] imagePos=new int[5][2];
-	protected Weapon[][] weapon=new Weapon[3][2];
-	
-	public Classe()
+	public Fighter()
 	{
 	}
-	
 	public void setStat(int force,int dexterity, int intelligence, int concentration)
 	{
 		stat=new int[4];
@@ -45,7 +44,6 @@ public class Classe
 	
 	public void update(GameEngine ge, float dt)
 	{
-		
 	}
 	
 	public int[] Attack(Weapon weapon)
@@ -72,7 +70,7 @@ public class Classe
 		float chance=0;
 		int deflect=0;
 		
-		if(weapon.getTag()=="Sword")
+		if(weapon.getTag()=="Sword" || weapon.getTag()=="Dagger")
 		{
 			chance=dexterity*weapon.getManiabilty()/10000f;
 			deflect=force*weapon.getParade()/100;
@@ -80,7 +78,7 @@ public class Classe
 		if(weapon.getTag()=="Staff")
 		{
 			chance=concentration*weapon.getFacility()/10000f;
-			deflect=intelligence*weapon.getProtection()/100;
+			deflect=intelligence*weapon.getEfficacity()/100;
 		}
 		if(weapon.getTag()=="Shield")
 		{
@@ -116,7 +114,6 @@ public class Classe
 		return imagePos;
 	}
 	
-
 	public Image[] getImage()
 	{		
 		return image;
@@ -130,11 +127,6 @@ public class Classe
 	public String getTag()
 	{
 		return tag;
-	}
-
-	public void setTag(String tag)
-	{
-		this.tag = tag;
 	}
 
 	public int getVitality()
@@ -167,7 +159,6 @@ public class Classe
 	{
 		return logo;
 	}
-
 
 	public Image getSplashArt()
 	{
@@ -237,11 +228,6 @@ public class Classe
 	public String getName()
 	{
 		return name;
-	}
-
-	public int[][] getStatCond()
-	{
-		return statCond;
 	}
 
 	public void setStatCond(int[][] statCond)

@@ -1,19 +1,19 @@
 package Game.Rooms;
 
-import Classes.Classe;
+import Classes.Fighter;
 import Game.GameManager;
 import Game.GameObject;
 import Game.Scripts;
 import GameEngine.GameEngine;
+import GameEngine.Image;
 import GameEngine.Renderer;
-import GameEngine.GFX.Image;
 
 public class B_StatSelect extends GameObject
 {		
 	private Image S1,S2,S3,S4;
 	private int phase=1;
 	public static Image confirm,playerText;
-	private Classe p1,p2;
+	private Fighter p1,p2;
 	int i=0;
 	int exp;
 	public static int[] stat=new int[4];
@@ -48,7 +48,7 @@ public class B_StatSelect extends GameObject
 			p1=statUI(p1,r);
 	}
 	
-	private Classe statUI(Classe player,Renderer r)
+	private Fighter statUI(Fighter player,Renderer r)
 	{
 		exp=player.getExp();
 		r.drawImage(player.getSplashArt(),1000, 0);
@@ -89,7 +89,7 @@ public class B_StatSelect extends GameObject
 			r.drawNumber(stat[2], 1600, 205);r.drawImage(S3, 1250, 200);
 			r.drawNumber(stat[3], 1600, 255);r.drawImage(S4, 1250, 250);
 			
-			player.setInitVitality(200+player.getExp()-stat[0]-stat[1]-stat[2]-stat[3]);
+			player.setInitVitality(200+3*player.getExp()-stat[0]-stat[1]-stat[2]-stat[3]);
 			r.drawImage(confirm, 1400, 325);
 			if(GameManager.Esc && player.isNew()) {i=0;}
 			if(GameManager.EB || Scripts.isClicked(confirm, 1400, 325)) 
@@ -111,13 +111,12 @@ public class B_StatSelect extends GameObject
 				}
 			}
 		}
-		r.drawNumber(100+exp-stat[0]-stat[1]-stat[2]-stat[3], 1950, 0);		
 		r.drawImage(playerText, 1000, 0);
 		r.drawNumber(phase, 1100, 0);
 		return player;	
 	}
 	
-	private int[][] statCond(Classe player)
+	private int[][] statCond(Fighter player)
 	{
 		if (player.getTag()=="Warrior")
 		{			

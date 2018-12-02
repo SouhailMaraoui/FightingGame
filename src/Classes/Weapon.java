@@ -1,6 +1,6 @@
 package Classes;
 
-import GameEngine.GFX.Image;
+import GameEngine.Image;
 
 public class Weapon
 {

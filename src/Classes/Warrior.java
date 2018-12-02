@@ -1,8 +1,8 @@
 package Classes;
 
-import GameEngine.GFX.Image;
+import GameEngine.Image;
 
-public class Warrior extends Classe 
+public class Warrior extends Fighter 
 {
 	private static Image I,A,P1,P2,H;
 	
@@ -13,9 +13,9 @@ public class Warrior extends Classe
 	private static int Hx,Hy;
 
 	public Warrior()
-	{		
-		Weapon sword=new Weapon(220,75,150);	sword.setTag("Sword"); 	sword.setImage("/UI/Info/Sword.png");
-		Weapon shield=new Weapon(180,90,250);	shield.setTag("Shield");shield.setImage("/UI/Info/Shield.png");
+	{	
+		Weapon sword=new Weapon(220,60,100);	sword.setTag("Sword"); 	sword.setImage("/UI/Info/Sword.png");
+		Weapon shield=new Weapon(180,0,200);	shield.setTag("Shield");shield.setImage("/UI/Info/Shield.png");
 		Weapon banner=new Weapon(175,50,0);	banner.setTag("Banner");banner.setImage("/UI/Info/Banner.png");
 		
 		Ix=2100;Iy=100;
@@ -27,7 +27,7 @@ public class Warrior extends Classe
 		I	=new Image("/Sprites/Warrior/Arena/Idle.png");	
 		A	=new Image("/Sprites/Warrior/Arena/Attack.png");
 		P1	=new Image("/Sprites/Warrior/Arena/Parry.png");
-		P2	=new Image("/Sprites/Warrior/Arena/Parry.png");
+		P2	=new Image("/Sprites/Warrior/Arena/ParryShield.png");
 		H	=new Image("/Sprites/Warrior/Arena/Heal.png");
 		
 		splashArt	=new Image("/SplashArt/Warrior.png");

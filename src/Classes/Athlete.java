@@ -1,8 +1,8 @@
 package Classes;
 
-import GameEngine.GFX.Image;
+import GameEngine.Image;
 
-public class Athlete extends Classe
+public class Athlete extends Fighter
 {
 	private static Image I,A1,A2,P,H;
 	
@@ -14,8 +14,8 @@ public class Athlete extends Classe
 
 	public Athlete()
 	{	
-		Weapon staff=new Weapon(400,100,90);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
-		Weapon dagger=new Weapon(400,100,0);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
+		Weapon staff=new Weapon(400,100,0);staff.setTag("Staff"); 	staff.setImage("/UI/Info/Staff.png");
+		Weapon dagger=new Weapon(400,100,90);dagger.setTag("Dagger"); 	dagger.setImage("/UI/Info/Dagger.png");
 		Weapon potion=new Weapon(400,100,0);potion.setTag("Potion"); 	potion.setImage("/UI/Info/Potion.png");
 		
 		Ix=2100;Iy=100;
@@ -40,7 +40,7 @@ public class Athlete extends Classe
 		imagePos[0][1]=Iy;imagePos[1][1]=A1y;imagePos[2][1]=A2y;imagePos[3][1]=Py;imagePos[4][1]=Hy;
 
 		weapon[0][0]=dagger;weapon[0][1]=staff; 
-		weapon[1][0]=staff ;weapon[1][1]=null; 
+		weapon[1][0]=dagger ;weapon[1][1]=null; 
 		weapon[2][0]=potion;weapon[2][1]=null; 
 	}
 }
